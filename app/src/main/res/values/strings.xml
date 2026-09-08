@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">DailyMooovie</string>
+    <string name="option1"> Today </string>
+    <string name="option2"> Explore </string>
+    <string name="option3"> Journey </string>
+    <string name="option4"> Albums </string>
+    <string name="option5"> Profile </string>
 </resources>
