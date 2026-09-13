@@ -1,0 +1,38 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?attr/colorControlNormal">
+    <!--
+        Gráfica de línea con puntos — JOURNEY
+        Representa progresión / historial
+    -->
+    <!-- Eje horizontal base -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="@color/white"
+        android:strokeWidth="1.6"
+        android:strokeLineCap="round"
+        android:pathData="M3,18 L21,18" />
+    <!-- Línea de la gráfica (valle y pico) -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="@color/white"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M3,14 L7,10 L11,13 L15,7 L21,11" />
+    <!-- Punto 1 -->
+    <path
+        android:fillColor="@color/white"
+        android:pathData="M7,9 A1.2,1.2 0 1,0 7,11.4 A1.2,1.2 0 1,0 7,9 Z" />
+    <!-- Punto 2 (pico) -->
+    <path
+        android:fillColor="@color/white"
+        android:pathData="M15,5.8 A1.2,1.2 0 1,0 15,8.2 A1.2,1.2 0 1,0 15,5.8 Z" />
+    <!-- Punto 3 final -->
+    <path
+        android:fillColor="@color/white"
+        android:pathData="M21,9.8 A1.2,1.2 0 1,0 21,12.2 A1.2,1.2 0 1,0 21,9.8 Z" />
+</vector>

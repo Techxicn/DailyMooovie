@@ -1,7 +1,28 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.DailyMooovie" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+        Dark mode FIJO: el variante night hereda exactamente el mismo tema.
+        No hay modo claro en DailyMooovie.
+    -->
+    <style name="Base.Theme.DailyMooovie" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/colorAccentRed</item>
+        <item name="colorPrimaryVariant">@color/colorAccentOrange</item>
+        <item name="colorOnPrimary">@color/colorOnBackground</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorSurfaceVariant">@color/colorSurfaceVariant</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorOnSurfaceVariant">@color/colorOnSurfaceMuted</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:statusBarColor">@color/colorBackground</item>
+        <item name="android:navigationBarColor">@color/colorSurfaceElevated</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:textColorPrimary">@color/colorOnBackground</item>
+        <item name="android:textColorSecondary">@color/colorOnSurfaceMuted</item>
+        <item name="android:textColorHint">@color/colorOnSurfaceFaint</item>
+        <item name="colorControlHighlight">@color/colorAccentRedDim</item>
     </style>
+
 </resources>

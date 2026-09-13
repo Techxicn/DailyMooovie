@@ -1,5 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- ── Backgrounds ─────────────────────────────────────────── -->
+    <color name="colorBackground">#FF0D0D0D</color>         <!-- fondo global app -->
+    <color name="colorSurface">#FF1A1A1A</color>            <!-- tarjetas / sheets -->
+    <color name="colorSurfaceVariant">#FF242424</color>     <!-- chips / items secundarios -->
+    <color name="colorSurfaceElevated">#FF2E2E2E</color>    <!-- navbar / overlays -->
+
+    <!-- ── Acentos ─────────────────────────────────────────────── -->
+    <color name="colorAccentRed">#FFE63946</color>          <!-- rojo primario (activo nav, CTA) -->
+    <color name="colorAccentOrange">#FFFF6B35</color>       <!-- naranja acento (ratings, chips) -->
+    <color name="colorAccentRedDim">#33E63946</color>       <!-- rojo translúcido (badges, scrim) -->
+
+    <!-- ── Texto ───────────────────────────────────────────────── -->
+    <color name="colorOnBackground">#FFFFFFFF</color>       <!-- texto primario sobre fondo -->
+    <color name="colorOnSurface">#FFFFFFFF</color>          <!-- texto primario sobre tarjeta -->
+    <color name="colorOnSurfaceMuted">#FF8A8A8A</color>     <!-- texto secundario / subtítulos -->
+    <color name="colorOnSurfaceFaint">#FF4D4D4D</color>     <!-- placeholders / texto deshabilitado -->
+
+    <!-- ── Separadores ─────────────────────────────────────────── -->
+    <color name="colorDivider">#FF2E2E2E</color>            <!-- separadores finos -->
+
+    <!-- ── Estrellas / Rating ──────────────────────────────────── -->
+    <color name="colorStar">#FFFFD166</color>               <!-- amarillo estrellas -->
+
+    <!-- ── Heatmap (Journey) — estados semánticos por día ──────
+         Cada celda del heatmap usa uno de estos colores según el
+         estado que provea la lógica. Enlazar por android:tag="day_N".
+
+           heatmapEmpty      → sin datos: día antes del registro del
+                               usuario, o día sin recomendación. (gris claro)
+           heatmapUnseen     → recomendado pero NO visto. (gris oscuro)
+           heatmapSeenLow    → visto, intensidad baja.
+           heatmapSeenMid    → visto, intensidad media.
+           heatmapSeenHigh   → visto, intensidad alta.
+           heatmapDiscovered → descubierta / destacada. (naranja)
+    -->
+    <color name="heatmapEmpty">#FF3A3F44</color>            <!-- gris claro: sin datos / pre-registro -->
+    <color name="heatmapUnseen">#FF242424</color>           <!-- gris oscuro: recomendado, no visto -->
+    <color name="heatmapSeenLow">#4DE63946</color>          <!-- visto: baja intensidad -->
+    <color name="heatmapSeenMid">#99E63946</color>          <!-- visto: media intensidad -->
+    <color name="heatmapSeenHigh">#FFE63946</color>         <!-- visto: alta intensidad -->
+    <color name="heatmapDiscovered">#FFFF6B35</color>       <!-- descubierta / destacada -->
+
+    <!-- ── Legacy (no borrar: referenciados por launcher) ────── -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
 </resources>

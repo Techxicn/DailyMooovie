@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    fragment_passport_detail.xml
+    ═════════════════════════════
+    Pantalla MOVIE PASSPORT — detalle de un sello de país.
+    Tab activo: navProfile.
+
+    Capas del header (FrameLayout 220dp):
+      ├── ImageView  ivHeaderMap   — imagen de mapa/textura del país
+      ├── View                     — scrim shape_header_scrim
+      ├── ImageView  btnBack       — esquina superior izquierda
+      ├── LinearLayout             — overlay texto inferior izquierdo
+      │     ├── View (línea roja 28×2dp)
+      │     ├── TextView tvHeaderCode  "JPN"
+      │     └── TextView tvHeaderCity  "TOKYO"
+      └── TextView  tvCountryCodeBadge — badge rojo pegado al borde derecho
+
+    Cuerpo (scroll vertical):
+      ├── Contador centrado "5 de 18 países sellados"
+      ├── Label "SELLADO POR"
+      ├── RecyclerView rvSealedMovies (item_sealed_movie)
+      │   + previewSealedList (4 includes, gone en runtime)
+      └── Nota "Próximo sello: Nigeria — …"
+-->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:scrollbars="none"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="32dp">
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  HEADER CON IMAGEN DE MAPA + OVERLAY                  ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <FrameLayout
+            android:id="@+id/headerMapContainer"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:background="@drawable/shape_header_map_bg">
+
+            <!-- Imagen de fondo: mapa/textura del país.
+                 En runtime cargada con Glide desde la URL del mapa. -->
+            <ImageView
+                android:id="@+id/ivHeaderMap"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="@null"
+                tools:src="@tools:sample/backgrounds/scenic"
+                tools:ignore="ImageContrastCheck" />
+
+            <!-- Scrim: degrada la imagen para garantizar legibilidad -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_header_scrim" />
+
+            <!-- Botón atrás — esquina superior izquierda -->
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="top|start"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_back"
+                android:padding="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/cd_back_button"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <!-- Texto inferior izquierdo: línea roja + código + ciudad -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|start"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="18dp"
+                android:orientation="vertical">
+
+                <!-- Línea decorativa roja -->
+                <View
+                    android:layout_width="28dp"
+                    android:layout_height="2dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="@color/colorAccentRed" />
+
+                <!-- Código ISO: "JPN" -->
+                <TextView
+                    android:id="@+id/tvHeaderCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="JPN"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorAccentRed"
+                    android:letterSpacing="0.2"
+                    android:textAllCaps="true"
+                    tools:ignore="HardcodedText" />
+
+                <!-- Ciudad: "TOKYO" -->
+                <TextView
+                    android:id="@+id/tvHeaderCity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TOKYO"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:fontFamily="sans-serif-condensed"
+                    android:letterSpacing="0.04"
+                    android:lineSpacingMultiplier="0.88"
+                    android:textAllCaps="true"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <!-- Badge de nombre del país pegado al borde derecho -->
+            <TextView
+                android:id="@+id/tvCountryCodeBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginBottom="18dp"
+                android:background="@drawable/shape_country_code_badge"
+                android:paddingStart="14dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:text="JAPÓN"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:letterSpacing="0.08"
+                android:textAllCaps="true"
+                tools:ignore="HardcodedText" />
+
+        </FrameLayout>
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  CONTADOR CENTRADO "5 de 18 países sellados"          ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingTop="18dp"
+            android:paddingBottom="18dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp">
+
+            <TextView
+                android:id="@+id/tvSealedCountDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccentRed"
+                android:fontFamily="sans-serif-condensed"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" de "
+                android:textSize="14sp"
+                android:textColor="@color/colorOnSurfaceMuted"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tvTotalCountriesDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="18"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorOnBackground"
+                android:fontFamily="sans-serif-condensed"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" países sellados"
+                android:textSize="14sp"
+                android:textColor="@color/colorOnSurfaceMuted"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <!-- Separador -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/colorDivider" />
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  LABEL "SELLADO POR"                                   ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="4dp"
+            android:text="SELLADO POR"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorOnSurfaceMuted"
+            android:letterSpacing="0.18"
+            android:textAllCaps="true"
+            tools:ignore="HardcodedText" />
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  RECYCLERVIEW — películas que dieron el sello         ║
+             ║                                                        ║
+             ║  En runtime:                                           ║
+             ║    rvSealedMovies.layoutManager = LinearLayoutManager ║
+             ║    rvSealedMovies.adapter = SealedMovieAdapter(films) ║
+             ║    rvSealedMovies.isNestedScrollingEnabled = false    ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSealedMovies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never"
+            tools:listitem="@layout/item_sealed_movie"
+            tools:itemCount="4"
+            tools:ignore="MissingConstraints" />
+
+        <!-- Preview estática para el editor de diseño
+             (gone en runtime, visible en Android Studio) -->
+        <LinearLayout
+            android:id="@+id/previewSealedList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <include
+                layout="@layout/item_sealed_movie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/colorDivider" />
+
+            <include
+                layout="@layout/item_sealed_movie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/colorDivider" />
+
+            <include
+                layout="@layout/item_sealed_movie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/colorDivider" />
+
+            <include
+                layout="@layout/item_sealed_movie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  NOTA FINAL — "Próximo sello: Nigeria — …"            ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorDivider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="top"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp">
+
+            <!-- Punto decorativo rojo -->
+            <View
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/shape_poster_badge"
+                android:backgroundTint="@color/colorAccentRed" />
+
+            <!-- Texto motivacional -->
+            <TextView
+                android:id="@+id/tvNextSeal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Próximo sello: Nigeria — Solo necesitas una película nigeriana para añadir un nuevo continente a tu pasaporte."
+                android:textSize="13sp"
+                android:textColor="@color/colorOnSurfaceMuted"
+                android:lineSpacingMultiplier="1.45"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Fondo principal surface variant con esquinas redondeadas -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/colorSurfaceVariant" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+
+    <!-- Borde izquierdo rojo de 3dp de ancho -->
+    <item android:right="0dp" android:top="0dp" android:bottom="0dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/colorAccentRed" />
+            <corners
+                android:topLeftRadius="10dp"
+                android:bottomLeftRadius="10dp"
+                android:topRightRadius="0dp"
+                android:bottomRightRadius="0dp" />
+            <size android:width="3dp" />
+        </shape>
+    </item>
+
+</layer-list>

@@ -1,0 +1,27 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?attr/colorControlNormal">
+    <!--
+        Diana / Target — TODAY
+        Círculo exterior → anillo medio → punto central
+    -->
+    <!-- Círculo exterior (aro) -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="@color/white"
+        android:strokeWidth="1.8"
+        android:pathData="M12,2 A10,10 0 1,0 12,22 A10,10 0 1,0 12,2 Z" />
+    <!-- Círculo medio (aro) -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="@color/white"
+        android:strokeWidth="1.8"
+        android:pathData="M12,7 A5,5 0 1,0 12,17 A5,5 0 1,0 12,7 Z" />
+    <!-- Punto central -->
+    <path
+        android:fillColor="@color/white"
+        android:pathData="M12,10.5 A1.5,1.5 0 1,0 12,13.5 A1.5,1.5 0 1,0 12,10.5 Z" />
+</vector>

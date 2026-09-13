@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    item_country_bar.xml
+    ────────────────────
+    Ítem de la lista "MÁS VISTO" en World Exploration.
+    Se infla en un RecyclerView; en el Adapter se bindean:
+      · tvCountryName  — nombre del país ("Estados Unidos")
+      · viewBar        — width ajustado proporcionalmente al máximo del dataset
+      · tvCountryCount — número a la derecha ("42")
+
+    Layout horizontal (altura 40dp):
+      [nombre país — expand] [barra roja — expand] [número fijo]
+
+    La barra usa layout_weight en el Adapter:
+      val params = viewBar.layoutParams as LinearLayout.LayoutParams
+      params.weight = count.toFloat() / maxCount.toFloat() * BAR_WEIGHT_MAX
+      viewBar.layoutParams = params
+
+    Para la preview visual en el editor el weight está hardcodeado en 0.7.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp">
+
+    <!-- Nombre del país -->
+    <TextView
+        android:id="@+id/tvCountryName"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="Estados Unidos"
+        android:textSize="13sp"
+        android:textColor="@color/colorOnBackground"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:ignore="HardcodedText" />
+
+    <!-- Contenedor de la barra: ocupa el espacio entre nombre y número -->
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="6dp"
+        android:layout_weight="1"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+        <!-- Track (fondo gris) -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:background="@drawable/shape_progress_track" />
+
+        <!-- Fill (rojo proporcional).
+             En el Adapter se ajusta el scaleX [0f..1f] según
+             count / maxCount. Para la preview visual = 0.75 (75%). -->
+        <View
+            android:id="@+id/viewBar"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:background="@drawable/shape_progress_fill"
+            android:scaleX="0.75"
+            android:transformPivotX="0dp" />
+
+    </FrameLayout>
+
+    <!-- Número alineado a la derecha -->
+    <TextView
+        android:id="@+id/tvCountryCount"
+        android:layout_width="28dp"
+        android:layout_height="wrap_content"
+        android:text="42"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorOnSurfaceMuted"
+        android:gravity="end"
+        tools:ignore="HardcodedText" />
+
+</LinearLayout>

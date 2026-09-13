@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Fondo del avatar de perfil.
+    Cuadrado con corners redondeados 14dp.
+    Color: rojo oscuro (#8A1A1A) — se puede sobreescribir via backgroundTint.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#FF8A1A1A" />
+    <corners android:radius="14dp" />
+</shape>

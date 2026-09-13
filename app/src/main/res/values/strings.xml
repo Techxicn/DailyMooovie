@@ -1,8 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- App -->
     <string name="app_name">DailyMooovie</string>
-    <string name="option1"> Today </string>
-    <string name="option2"> Explore </string>
-    <string name="option3"> Journey </string>
-    <string name="option4"> Albums </string>
-    <string name="option5"> Profile </string>
+
+    <!-- ── Bottom Navigation ───────────────────────────────────── -->
+    <string name="nav_today">TODAY</string>
+    <string name="nav_explore">EXPLORE</string>
+    <string name="nav_journey">JOURNEY</string>
+    <string name="nav_movies">MIS PELÍCULAS</string>
+    <string name="nav_profile">PROFILE</string>
+
+    <!-- ── Headers / Toolbar ──────────────────────────────────── -->
+    <string name="header_explore">EXPLORE</string>
+    <string name="header_journey">JOURNEY</string>
+    <string name="header_my_movies">MIS PELÍCULAS</string>
+    <string name="header_profile">PROFILE</string>
+    <string name="header_movie_detail">MOVIE DETAIL</string>
+
+    <!-- ── Section Labels (separadores) ──────────────────────── -->
+    <string name="section_your_top_five">YOUR TOP FIVE</string>
+    <string name="section_recently">RECENTLY</string>
+    <string name="section_trending">TRENDING</string>
+    <string name="section_new_releases">NEW RELEASES</string>
+    <string name="section_genres">GENRES</string>
+    <string name="section_watched">WATCHED</string>
+    <string name="section_watchlist">WATCHLIST</string>
+    <string name="section_favorites">FAVORITES</string>
+    <string name="section_stats">MY STATS</string>
+
+    <!-- ── Acciones generales ─────────────────────────────────── -->
+    <string name="action_share">Share</string>
+    <string name="action_back">Back</string>
+    <string name="action_add_watchlist">Add to Watchlist</string>
+    <string name="action_mark_watched">Mark as Watched</string>
+    <string name="action_rate">Rate</string>
+    <string name="action_see_all">SEE ALL</string>
+
+    <!-- ── Placeholders / sample data ────────────────────────── -->
+    <string name="placeholder_movie_title">The Grand Illusion</string>
+    <string name="placeholder_movie_year">1937</string>
+    <string name="placeholder_movie_genre">Drama · War</string>
+    <string name="placeholder_movie_rating">8.1</string>
+    <string name="placeholder_movie_duration">1h 54min</string>
+    <string name="placeholder_movie_overview">A film about the nature of class distinctions and the absurdity of war, told through the story of prisoners of war during World War I.</string>
+    <string name="placeholder_director">Jean Renoir</string>
+    <string name="placeholder_today_label">TODAY\'S PICK</string>
+    <string name="placeholder_today_date">September 13</string>
+
+    <!-- ── Accesibilidad ──────────────────────────────────────── -->
+    <string name="cd_movie_poster">Movie poster</string>
+    <string name="cd_back_button">Go back</string>
+    <string name="cd_share_button">Share</string>
+    <string name="cd_nav_today">Navigate to Today</string>
+    <string name="cd_nav_explore">Navigate to Explore</string>
+    <string name="cd_nav_journey">Navigate to Journey</string>
+    <string name="cd_nav_movies">Navigate to My Movies</string>
+    <string name="cd_nav_profile">Navigate to Profile</string>
+
+    <!-- Legacy (no borrar) -->
+    <string name="option1">TODAY</string>
+    <string name="option2">EXPLORE</string>
+    <string name="option3">JOURNEY</string>
+    <string name="option4">MIS PELÍCULAS</string>
+    <string name="option5">PROFILE</string>
+
 </resources>

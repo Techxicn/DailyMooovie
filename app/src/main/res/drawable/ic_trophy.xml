@@ -1,0 +1,42 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="28dp"
+    android:height="28dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Copa del trofeo -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="@color/white"
+        android:strokeWidth="1.7"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M8,2 L16,2 L16,10 C16,13.31 14.21,15 12,15 C9.79,15 8,13.31 8,10 Z" />
+    <!-- Asa izquierda -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="@color/white"
+        android:strokeWidth="1.7"
+        android:strokeLineCap="round"
+        android:pathData="M8,5 C6,5 5,6.5 5,8 C5,9.5 6,11 8,11" />
+    <!-- Asa derecha -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="@color/white"
+        android:strokeWidth="1.7"
+        android:strokeLineCap="round"
+        android:pathData="M16,5 C18,5 19,6.5 19,8 C19,9.5 18,11 16,11" />
+    <!-- Pedestal -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="@color/white"
+        android:strokeWidth="1.7"
+        android:strokeLineCap="round"
+        android:pathData="M12,15 L12,19" />
+    <!-- Base -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="@color/white"
+        android:strokeWidth="1.7"
+        android:strokeLineCap="round"
+        android:pathData="M9,19 L15,19" />
+</vector>

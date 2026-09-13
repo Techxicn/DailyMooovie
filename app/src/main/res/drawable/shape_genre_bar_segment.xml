@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Segmento base de la barra segmentada de géneros.
+     Sin corners: los segmentos se tocan sin gap visible.
+     El color se sobreescribe por cada segmento vía android:backgroundTint o
+     android:background con un color sólido hardcodeado en el layout. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/colorSurfaceVariant" />
+</shape>

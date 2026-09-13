@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    fragment_top_five.xml
+    ══════════════════════
+    Pantalla TOP FIVE — pantalla secundaria desde Journey.
+    Tab activo: navJourney.
+
+    Estructura:
+      1. Header: back + share
+      2. Label "YOUR TOP FIVE" con líneas decorativas a los costados
+      3. Lista numerada del 1 al 5 (5× include item_top_five_movie)
+      4. Separador
+      5. Card "El Explorador Curioso" (viewer type)
+      6. Botón rojo "Compartir tu 2026"
+-->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:scrollbars="none"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="32dp">
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  1. HEADER — back + share                             ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_back"
+                android:padding="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/cd_back_button"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <ImageView
+                android:id="@+id/btnShare"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_share"
+                android:padding="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/cd_share_button"
+                android:clickable="true"
+                android:focusable="true" />
+
+        </RelativeLayout>
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  2. LABEL "YOUR TOP FIVE" con líneas decorativas      ║
+             ║  Patrón: ────────  YOUR TOP FIVE  ────────            ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="24dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Línea izquierda -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@color/colorDivider" />
+
+            <!-- Label centrado -->
+            <TextView
+                android:id="@+id/tvTopFiveLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:text="YOUR TOP FIVE"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorOnSurfaceMuted"
+                android:letterSpacing="0.18"
+                android:textAllCaps="true"
+                tools:ignore="HardcodedText" />
+
+            <!-- Línea derecha -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@color/colorDivider" />
+
+        </LinearLayout>
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  3. LISTA NUMERADA 1–5                                ║
+             ║  Cada include hereda el layout item_top_five_movie.   ║
+             ║  En el Fragment se bindean: tvRank (texto "1"–"5"),   ║
+             ║  ivPosterTop, tvMovieTitleTop, tvMovieMetaTop.        ║
+             ╚══════════════════════════════════════════════════════╝ -->
+
+        <!-- Película #1 -->
+        <include
+            android:id="@+id/itemTop1"
+            layout="@layout/item_top_five_movie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/colorDivider" />
+
+        <!-- Película #2 -->
+        <include
+            android:id="@+id/itemTop2"
+            layout="@layout/item_top_five_movie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/colorDivider" />
+
+        <!-- Película #3 -->
+        <include
+            android:id="@+id/itemTop3"
+            layout="@layout/item_top_five_movie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/colorDivider" />
+
+        <!-- Película #4 -->
+        <include
+            android:id="@+id/itemTop4"
+            layout="@layout/item_top_five_movie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/colorDivider" />
+
+        <!-- Película #5 -->
+        <include
+            android:id="@+id/itemTop5"
+            layout="@layout/item_top_five_movie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  4. SEPARADOR DE SECCIÓN                              ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/colorDivider" />
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  5. CARD "TU TIPO DE ESPECTADOR"                      ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <LinearLayout
+            android:id="@+id/cardViewerType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_viewer_card"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <!-- Label rojo pequeño -->
+            <TextView
+                android:id="@+id/tvViewerTypeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TU TIPO DE ESPECTADOR"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccentRed"
+                android:letterSpacing="0.16"
+                android:textAllCaps="true"
+                tools:ignore="HardcodedText" />
+
+            <!-- Línea decorativa corta bajo el label -->
+            <View
+                android:layout_width="24dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="12dp"
+                android:background="@color/colorAccentRed" />
+
+            <!-- Título grande condensed -->
+            <TextView
+                android:id="@+id/tvViewerTypeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="EL EXPLORADOR\nCURIOSO"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorOnBackground"
+                android:fontFamily="sans-serif-condensed"
+                android:letterSpacing="0.02"
+                android:lineSpacingMultiplier="0.92"
+                android:textAllCaps="true"
+                tools:ignore="HardcodedText" />
+
+            <!-- Descripción en gris -->
+            <TextView
+                android:id="@+id/tvViewerTypeDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Te mueves entre géneros constantemente y rara vez te quedas en una década por mucho tiempo."
+                android:textSize="13sp"
+                android:textColor="@color/colorOnSurfaceMuted"
+                android:lineSpacingMultiplier="1.45"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  6. BOTÓN ROJO "Compartir tu 2026"                    ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <LinearLayout
+            android:id="@+id/btnShareYear"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_btn_red"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_share"
+                android:tint="@color/white"
+                android:contentDescription="@null"
+                tools:ignore="SrcCompat,UseAppTint" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Compartir tu 2026"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:letterSpacing="0.04"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

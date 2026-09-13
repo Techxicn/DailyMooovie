@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    fragment_world_map.xml
+    ════════════════════════
+    Pantalla WORLD EXPLORATION — vista de mapa.
+    Tab activo: navJourney (ajustar a navProfile si la pantalla se mueve).
+
+    Secciones:
+      1. Header: back + título centrado "WORLD EXPLORATION"
+      2. Hero: label rojo / título "18 países vistos" / descripción
+      3. Bloque del mapa: fondo oscuro + ImageView ic_world_map
+      4. Leyenda: "1" · barra degradada · "42" · label "PELÍCULAS POR PAÍS"
+      5. Fila 3 estadísticas: PAÍSES / PELÍCULAS / CONTINENTES
+      6. Sección "MÁS VISTO" — primer ítem de la lista dinámica
+-->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:scrollbars="none"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="32dp">
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  1. HEADER                                            ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_back"
+                android:padding="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/cd_back_button"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/tvHeaderTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="WORLD EXPLORATION"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorOnBackground"
+                android:letterSpacing="0.08"
+                android:textAllCaps="true"
+                tools:ignore="HardcodedText" />
+
+        </RelativeLayout>
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  2. HERO: label rojo / título / descripción           ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="16dp">
+
+            <!-- Label rojo -->
+            <TextView
+                android:id="@+id/tvMapLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TU MUNDO DE CINE"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccentRed"
+                android:letterSpacing="0.18"
+                android:textAllCaps="true"
+                tools:ignore="HardcodedText" />
+
+            <!-- Título "N países vistos" -->
+            <TextView
+                android:id="@+id/tvCountriesCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="18 países vistos"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorOnBackground"
+                android:fontFamily="sans-serif-condensed"
+                android:letterSpacing="-0.01"
+                tools:ignore="HardcodedText" />
+
+            <!-- Descripción -->
+            <TextView
+                android:id="@+id/tvMapDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Mientras más rojo, más películas has terminado de ahí."
+                android:textSize="13sp"
+                android:textColor="@color/colorOnSurfaceMuted"
+                android:lineSpacingMultiplier="1.4"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  3. BLOQUE DEL MAPA                                   ║
+             ║                                                        ║
+             ║  FrameLayout con fondo colorSurface como contenedor.  ║
+             ║  ImageView con ic_world_map escala fitCenter.         ║
+             ║  En runtime: un CustomView o VectorDrawable con       ║
+             ║  setPathTintList() colorea los paths de países.       ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <FrameLayout
+            android:id="@+id/mapContainer"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/colorSurface"
+            android:clipToOutline="true">
+
+            <!-- Mapa: ImageView con el SVG de siluetas de continentes.
+                 En runtime el Fragment puede:
+                   a) Dejar el drawable estático como referencia visual
+                   b) Reemplazarlo por un CustomView que colorea por país -->
+            <ImageView
+                android:id="@+id/ivWorldMap"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_world_map"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:contentDescription="@null"
+                tools:ignore="ImageContrastCheck" />
+
+            <!-- Overlay sutil: degradado vertical transparente→negro en el borde
+                 inferior para que el mapa se integre con el fondo -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/shape_map_fade" />
+
+        </FrameLayout>
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  4. LEYENDA: "1" · barra degradada · "42"            ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="4dp">
+
+            <!-- Fila: valor mínimo + barra + valor máximo -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <!-- Valor mínimo -->
+                <TextView
+                    android:id="@+id/tvLegendMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="1"
+                    android:textSize="11sp"
+                    android:textColor="@color/colorOnSurfaceMuted"
+                    tools:ignore="HardcodedText" />
+
+                <!-- Barra degradada gris → rojo -->
+                <View
+                    android:id="@+id/viewLegendBar"
+                    android:layout_width="0dp"
+                    android:layout_height="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_legend_gradient" />
+
+                <!-- Valor máximo -->
+                <TextView
+                    android:id="@+id/tvLegendMax"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="42"
+                    android:textSize="11sp"
+                    android:textColor="@color/colorOnSurfaceMuted"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <!-- Label "PELÍCULAS POR PAÍS" centrado bajo la barra -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="PELÍCULAS POR PAÍS"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorOnSurfaceFaint"
+                android:letterSpacing="0.14"
+                android:textAllCaps="true"
+                android:gravity="center"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <!-- Separador -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp"
+            android:background="@color/colorDivider" />
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  5. FILA DE 3 ESTADÍSTICAS                            ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <!-- PAÍSES -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/tvStatCountries"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="18"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorOnBackground"
+                    android:fontFamily="sans-serif-condensed"
+                    android:includeFontPadding="false"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:text="PAÍSES"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorOnSurfaceMuted"
+                    android:letterSpacing="0.1"
+                    android:textAllCaps="true"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <!-- Divisor vertical izq -->
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/colorDivider" />
+
+            <!-- PELÍCULAS -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/tvStatMovies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="172"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorAccentRed"
+                    android:fontFamily="sans-serif-condensed"
+                    android:includeFontPadding="false"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:text="PELÍCULAS"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorOnSurfaceMuted"
+                    android:letterSpacing="0.1"
+                    android:textAllCaps="true"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <!-- Divisor vertical der -->
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/colorDivider" />
+
+            <!-- CONTINENTES -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/tvStatContinents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorOnBackground"
+                    android:fontFamily="sans-serif-condensed"
+                    android:includeFontPadding="false"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:text="CONTINENTES"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorOnSurfaceMuted"
+                    android:letterSpacing="0.1"
+                    android:textAllCaps="true"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Separador -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/colorDivider" />
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  6. SECCIÓN "MÁS VISTO" — primer ítem dinámico       ║
+             ║                                                        ║
+             ║  Muestra el país #1 de la lista.                      ║
+             ║  El RecyclerView completo está en la pantalla lista.  ║
+             ║  Aquí solo se pre-visualiza el primer resultado.      ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="4dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="MÁS VISTO"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorOnSurfaceMuted"
+                android:letterSpacing="0.18"
+                android:textAllCaps="true"
+                tools:ignore="HardcodedText" />
+
+            <!-- Link a la vista de lista completa -->
+            <TextView
+                android:id="@+id/tvSeeList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VER LISTA"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccentRed"
+                android:letterSpacing="0.08"
+                android:textAllCaps="true"
+                android:background="?attr/selectableItemBackground"
+                android:paddingStart="8dp"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <!-- Primer ítem: usa el mismo item_country_bar que la pantalla de lista -->
+        <include
+            android:id="@+id/topCountryItem"
+            layout="@layout/item_country_bar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+        <!-- Indicador de continuación: "· · ·" sugiere que hay más ítems -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="8dp"
+            android:text="Ver los 18 países →"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccentRed"
+            android:background="?attr/selectableItemBackground"
+            android:id="@+id/tvSeeAllCountries"
+            tools:ignore="HardcodedText" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

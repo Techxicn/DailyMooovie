@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    item_poster_recent.xml
+    ─────────────────────
+    Ítem del scroll horizontal "RECIENTEMENTE" en la pantalla Journey.
+    Ancho fijo 68dp · poster 68×96dp con corners 8dp · fecha debajo 10sp muted.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="68dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_marginEnd="10dp">
+
+    <!-- Poster -->
+    <ImageView
+        android:id="@+id/ivPosterRecent"
+        android:layout_width="68dp"
+        android:layout_height="96dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/shape_poster_small_rounded"
+        android:clipToOutline="true"
+        android:contentDescription="@string/cd_movie_poster"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <!-- Fecha: "31 AGO" -->
+    <TextView
+        android:id="@+id/tvPosterDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="31 AGO"
+        android:textSize="10sp"
+        android:textColor="@color/colorOnSurfaceMuted"
+        android:letterSpacing="0.06"
+        android:textAllCaps="true"
+        tools:ignore="HardcodedText" />
+
+</LinearLayout>

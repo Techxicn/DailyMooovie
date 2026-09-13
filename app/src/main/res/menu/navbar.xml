@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
-        android:id="@+id/option1"
-        android:title="@string/option1"
-        >
-    </item>
+        android:id="@+id/navToday"
+        android:icon="@drawable/ic_nav_today"
+        android:title="@string/nav_today" />
+
     <item
-        android:id="@+id/option2"
-        android:title="@string/option2"
-        >
-    </item>
+        android:id="@+id/navExplore"
+        android:icon="@drawable/ic_nav_explore"
+        android:title="@string/nav_explore" />
+
     <item
-        android:id="@+id/option3"
-        android:title="@string/option3"
-        >
-    </item>
+        android:id="@+id/navJourney"
+        android:icon="@drawable/ic_nav_journey"
+        android:title="@string/nav_journey" />
+
     <item
-        android:id="@+id/option4"
-        android:title="@string/option4"
-        >
-    </item>
+        android:id="@+id/navMovies"
+        android:icon="@drawable/ic_nav_movies"
+        android:title="@string/nav_movies" />
+
     <item
-        android:id="@+id/option5"
-        android:title="@string/option5"
-        >
-    </item>
+        android:id="@+id/navProfile"
+        android:icon="@drawable/ic_nav_profile"
+        android:title="@string/nav_profile" />
+
 </menu>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Badge del código de país (ej. "JPN") en el header del mapa.
+    Fondo rojo sólido, corners solo en el lado izquierdo (el derecho
+    se "pega" al borde de la pantalla visualmente).
+    Uso: TextView posicionado en la esquina inferior derecha del header.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/colorAccentRed" />
+    <corners
+        android:topLeftRadius="6dp"
+        android:bottomLeftRadius="6dp"
+        android:topRightRadius="0dp"
+        android:bottomRightRadius="0dp" />
+</shape>

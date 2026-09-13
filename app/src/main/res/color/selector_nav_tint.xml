@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Ítem activo → rojo acento -->
+    <item
+        android:color="@color/colorAccentRed"
+        android:state_checked="true" />
+    <!-- Ítem inactivo → gris muted -->
+    <item android:color="@color/colorOnSurfaceMuted" />
+</selector>

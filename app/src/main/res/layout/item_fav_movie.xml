@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    item_fav_movie.xml
+    ──────────────────
+    Ítem del RecyclerView "FAVORITAS" (scroll horizontal) en Profile.
+    Ancho fijo 96dp · poster 96×140dp corners 8dp · título 2 líneas debajo.
+
+    IDs: ivFavPoster, tvFavTitle.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="96dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginEnd="12dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?attr/selectableItemBackground">
+
+    <!-- Poster -->
+    <ImageView
+        android:id="@+id/ivFavPoster"
+        android:layout_width="96dp"
+        android:layout_height="140dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/shape_poster_small_rounded"
+        android:clipToOutline="true"
+        android:contentDescription="@string/cd_movie_poster"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tvFavTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Título de la película"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorOnBackground"
+        android:fontFamily="sans-serif-condensed"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:lineSpacingMultiplier="1.05"
+        tools:ignore="HardcodedText" />
+
+</LinearLayout>

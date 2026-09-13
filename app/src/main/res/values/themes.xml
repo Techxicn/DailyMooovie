@@ -1,9 +1,47 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.DailyMooovie" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+        DailyMooovie usa dark mode FIJO independientemente del modo del sistema.
+        Ambos temas (day/night) apuntan al mismo estilo oscuro.
+    -->
+
+    <style name="Base.Theme.DailyMooovie" parent="Theme.Material3.Dark.NoActionBar">
+
+        <!-- Color primario → rojo acento -->
+        <item name="colorPrimary">@color/colorAccentRed</item>
+        <item name="colorPrimaryVariant">@color/colorAccentOrange</item>
+        <item name="colorOnPrimary">@color/colorOnBackground</item>
+
+        <!-- Superficies -->
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorSurfaceVariant">@color/colorSurfaceVariant</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorOnSurfaceVariant">@color/colorOnSurfaceMuted</item>
+
+        <!-- Fondo de ventana -->
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+
+        <!-- Status & navigation bar -->
+        <item name="android:statusBarColor">@color/colorBackground</item>
+        <item name="android:navigationBarColor">@color/colorSurfaceElevated</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+
+        <!-- Texto -->
+        <item name="android:textColorPrimary">@color/colorOnBackground</item>
+        <item name="android:textColorSecondary">@color/colorOnSurfaceMuted</item>
+        <item name="android:textColorHint">@color/colorOnSurfaceFaint</item>
+
+        <!-- Divider / separadores -->
+        <item name="dividerHorizontal">@color/colorDivider</item>
+
+        <!-- Ripple sobre superficies oscuras -->
+        <item name="colorControlHighlight">@color/colorAccentRedDim</item>
+
     </style>
 
     <style name="Theme.DailyMooovie" parent="Base.Theme.DailyMooovie" />
+
 </resources>

@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    fragment_today.xml
+    ══════════════════
+    Pantalla TODAY — Película del día.
+    Diseño: dark mode, acentos rojo/naranja, scroll vertical completo.
+
+    Jerarquía:
+      NestedScrollView (fondo colorBackground)
+        └── LinearLayout vertical (contenedor principal)
+              ├── [HEADER] fecha + label + contador
+              ├── [POSTER] FrameLayout (imagen + badge fecha)
+              ├── [TÍTULO] TextView hero
+              ├── [DIRECTOR] TextView mediano
+              ├── [METADATA] TextView gris pequeño
+              ├── [CITA] card con tagline en itálica
+              ├── [LEER] link rojo + flecha abajo
+              ├── [BTN STREAM 1] botón primario con ícono
+              ├── [BTN STREAM 2] botón outline con ícono
+              ├── [CHIPS] fila 3 chips: GUARDAR / VISTA / CALIFICAR
+              ├── [RACHA] fila: fuego + días + link Journey
+              └── [MAÑANA] separador + texto centrado
+-->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:scrollbars="none"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="24dp">
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  HEADER: fecha / label PELÍCULA DEL DÍA / contador   ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="12dp">
+
+            <!-- Columna izquierda: fecha + label rojo -->
+            <LinearLayout
+                android:id="@+id/layoutHeaderLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+
+                <!-- Fecha -->
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="31 AGO 2026"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorOnSurfaceMuted"
+                    android:letterSpacing="0.06"
+                    android:textAllCaps="true"
+                    tools:ignore="HardcodedText" />
+
+                <!-- Label rojo "PELÍCULA DEL DÍA" -->
+                <TextView
+                    android:id="@+id/tvDayLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="PELÍCULA DEL DÍA"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorAccentRed"
+                    android:letterSpacing="0.12"
+                    android:textAllCaps="true"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <!-- Contador "243 / 365" a la derecha -->
+            <LinearLayout
+                android:id="@+id/layoutHeaderRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:orientation="vertical"
+                android:gravity="end">
+
+                <TextView
+                    android:id="@+id/tvDayCounter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="243"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorOnBackground"
+                    android:fontFamily="sans-serif-condensed"
+                    android:lineSpacingMultiplier="0.9"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/tvDayCounterTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/ 365"
+                    android:textSize="11sp"
+                    android:textColor="@color/colorOnSurfaceMuted"
+                    android:layout_gravity="end"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  POSTER + BADGE FECHA                                 ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="16dp">
+
+            <!-- Poster de la película
+                 android:background + android:clipToOutline (en Fragment.kt)
+                 producen el recorte de esquinas redondeadas en runtime.
+                 En el editor de layout el shape_poster_rounded da la preview visual. -->
+            <ImageView
+                android:id="@+id/ivPoster"
+                android:layout_width="match_parent"
+                android:layout_height="460dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/shape_poster_rounded"
+                android:clipToOutline="true"
+                android:contentDescription="@string/cd_movie_poster"
+                tools:src="@tools:sample/backgrounds/scenic"
+                tools:ignore="ImageContrastCheck" />
+
+            <!-- Badge circular con fecha: "31 / AGO"
+                 Posicionado en la esquina inferior derecha del poster -->
+            <FrameLayout
+                android:id="@+id/badgePosterDate"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="bottom|end"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/shape_poster_badge"
+                android:elevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tvBadgeDay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="31"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:fontFamily="sans-serif-condensed"
+                        android:lineSpacingMultiplier="0.85"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/tvBadgeMonth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AGO"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:letterSpacing="0.1"
+                        android:textAllCaps="true"
+                        tools:ignore="HardcodedText" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </FrameLayout>
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  TÍTULO DE LA PELÍCULA                                ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <TextView
+            android:id="@+id/tvMovieTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="La Ilusión Perdida"
+            android:textSize="38sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorOnBackground"
+            android:fontFamily="sans-serif-condensed"
+            android:letterSpacing="-0.02"
+            android:lineSpacingMultiplier="0.92"
+            tools:ignore="HardcodedText" />
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  DIRECTOR                                             ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <TextView
+            android:id="@+id/tvDirector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="4dp"
+            android:text="Dirigida por Alejandro Fuentes"
+            android:textSize="14sp"
+            android:textColor="@color/colorOnSurfaceMuted"
+            tools:ignore="HardcodedText" />
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  METADATA: Año · País · Género                        ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <TextView
+            android:id="@+id/tvMetadata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="16dp"
+            android:text="1974  ·  México  ·  Drama"
+            android:textSize="12sp"
+            android:textColor="@color/colorOnSurfaceFaint"
+            android:letterSpacing="0.04"
+            tools:ignore="HardcodedText" />
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  CARD CITA / TAGLINE                                  ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_card_quote"
+                android:orientation="vertical"
+                android:paddingStart="18dp"
+                android:paddingEnd="14dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp">
+
+                <TextView
+                    android:id="@+id/tvQuote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="El amor no se pierde, simplemente aprende a vivir en silencio."
+                    android:textSize="14sp"
+                    android:textStyle="italic"
+                    android:textColor="@color/colorOnSurface"
+                    android:lineSpacingMultiplier="1.45"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  LINK "LEER LA HISTORIA" + flecha                     ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <LinearLayout
+            android:id="@+id/btnReadStory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="14dp"
+            android:paddingBottom="2dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="?attr/selectableItemBackground">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LEER LA HISTORIA"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccentRed"
+                android:letterSpacing="0.1"
+                android:textAllCaps="true"
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="6dp"
+                android:src="@drawable/ic_arrow_down"
+                android:contentDescription="@null" />
+
+        </LinearLayout>
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  BOTÓN PRIMARIO — Streaming 1                         ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <LinearLayout
+            android:id="@+id/btnStreamPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/shape_btn_primary"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_play"
+                android:contentDescription="@null" />
+
+            <TextView
+                android:id="@+id/tvStreamPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ver en MUBI"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorBackground"
+                android:letterSpacing="0.04"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  BOTÓN SECUNDARIO — Streaming 2 (outline)             ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <LinearLayout
+            android:id="@+id/btnStreamSecondary"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_btn_outline"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_play"
+                android:tint="@color/colorOnSurfaceMuted"
+                android:contentDescription="@null"
+                tools:ignore="SrcCompat,UseAppTint" />
+
+            <TextView
+                android:id="@+id/tvStreamSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Disponible en Criterion Channel"
+                android:textSize="13sp"
+                android:textColor="@color/colorOnSurfaceMuted"
+                android:letterSpacing="0.02"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  CHIPS: GUARDAR / VISTA / CALIFICAR                   ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="4dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:weightSum="3">
+
+            <!-- Chip GUARDAR -->
+            <LinearLayout
+                android:id="@+id/chipSave"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/shape_chip_outline"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/ic_heart"
+                    android:contentDescription="@null" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="GUARDAR"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorOnSurfaceMuted"
+                    android:letterSpacing="0.06"
+                    android:textAllCaps="true"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <!-- Chip VISTA (activo = rojo) -->
+            <LinearLayout
+                android:id="@+id/chipWatched"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:background="@drawable/shape_chip_active"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/ic_check_circle"
+                    android:contentDescription="@null" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VISTA"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorAccentRed"
+                    android:letterSpacing="0.06"
+                    android:textAllCaps="true"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <!-- Chip CALIFICAR -->
+            <LinearLayout
+                android:id="@+id/chipRate"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/shape_chip_outline"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/ic_star"
+                    android:contentDescription="@null" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CALIFICAR"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorOnSurfaceMuted"
+                    android:letterSpacing="0.06"
+                    android:textAllCaps="true"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  RACHA: fuego + días + link "Tu Journey"              ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Ícono fuego -->
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_fire"
+                android:contentDescription="@null" />
+
+            <!-- Texto racha -->
+            <TextView
+                android:id="@+id/tvStreak"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="23 días de racha"
+                android:textSize="13sp"
+                android:textColor="@color/colorOnBackground"
+                tools:ignore="HardcodedText" />
+
+            <!-- Link "Tu Journey" a la derecha -->
+            <TextView
+                android:id="@+id/linkJourney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tu Journey →"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccentRed"
+                android:letterSpacing="0.04"
+                android:background="?attr/selectableItemBackground"
+                android:paddingStart="8dp"
+                android:paddingEnd="0dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  SEPARADOR + "Mañana, 08:00"                          ║
+             ╚══════════════════════════════════════════════════════╝ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="8dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Línea izquierda -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@color/colorDivider" />
+
+            <!-- Texto centrado -->
+            <TextView
+                android:id="@+id/tvNextMovie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:text="Mañana, 08:00"
+                android:textSize="11sp"
+                android:textColor="@color/colorOnSurfaceFaint"
+                android:letterSpacing="0.06"
+                tools:ignore="HardcodedText" />
+
+            <!-- Línea derecha -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@color/colorDivider" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    fragment_my_movies.xml
+    ════════════════════════
+    Pantalla MIS PELÍCULAS — tab del bottom navigation.
+    Tab activo: navMovies.
+
+    Estructura:
+      1. Header: título grande + subtítulo gris + íconos búsqueda/grid
+      2. Tabs: VISTAS · QUIERO VER · FAVORITAS
+      3. RecyclerView GridLayoutManager(3) con item_movie_grid
+
+    Gestión de tabs en el Fragment:
+      tabWatched / tabWatchlist / tabFavorites → onClick alterna:
+        tab activo  → background=shape_tab_active,  textColor=colorAccentRed
+        tab inactivo→ background=shape_tab_inactive, textColor=colorOnSurfaceMuted
+      El RV se actualiza con la lista correspondiente al tab seleccionado.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorBackground">
+
+    <!-- ╔══════════════════════════════════════════════════════╗
+         ║  1. HEADER                                            ║
+         ╚══════════════════════════════════════════════════════╝ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="4dp">
+
+        <!-- Título + subtítulo -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvMyMoviesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mis Películas"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorOnBackground"
+                android:fontFamily="sans-serif-condensed"
+                android:letterSpacing="-0.01"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tvMyMoviesSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:text="9 vistas · 6 guardadas"
+                android:textSize="12sp"
+                android:textColor="@color/colorOnSurfaceMuted"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <!-- Ícono búsqueda -->
+        <ImageView
+            android:id="@+id/btnSearch"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_search"
+            android:padding="9dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@null"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- Ícono grid/vista -->
+        <ImageView
+            android:id="@+id/btnGridView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_grid_view"
+            android:padding="9dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@null"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </LinearLayout>
+
+    <!-- ╔══════════════════════════════════════════════════════╗
+         ║  2. FILA DE TABS                                       ║
+         ║  Scroll horizontal para pantallas más estrechas.       ║
+         ╚══════════════════════════════════════════════════════╝ -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Tab VISTAS · 9 — activo por defecto -->
+            <TextView
+                android:id="@+id/tabWatched"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/shape_tab_active"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:gravity="center"
+                android:text="VISTAS · 9"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccentRed"
+                android:letterSpacing="0.06"
+                android:textAllCaps="true"
+                android:clickable="true"
+                android:focusable="true"
+                tools:ignore="HardcodedText" />
+
+            <!-- Tab QUIERO VER · 6 — inactivo -->
+            <TextView
+                android:id="@+id/tabWatchlist"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/shape_tab_inactive"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:gravity="center"
+                android:text="QUIERO VER · 6"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorOnSurfaceMuted"
+                android:letterSpacing="0.06"
+                android:textAllCaps="true"
+                android:clickable="true"
+                android:focusable="true"
+                tools:ignore="HardcodedText" />
+
+            <!-- Tab FAVORITAS · 4 — inactivo -->
+            <TextView
+                android:id="@+id/tabFavorites"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:background="@drawable/shape_tab_inactive"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:gravity="center"
+                android:text="FAVORITAS · 4"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorOnSurfaceMuted"
+                android:letterSpacing="0.06"
+                android:textAllCaps="true"
+                android:clickable="true"
+                android:focusable="true"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <!-- ╔══════════════════════════════════════════════════════╗
+         ║  3. GRID DE PELÍCULAS — RecyclerView                  ║
+         ║                                                        ║
+         ║  En runtime:                                           ║
+         ║    rvMoviesGrid.layoutManager =                       ║
+         ║        GridLayoutManager(context, 3)                  ║
+         ║    rvMoviesGrid.adapter = MovieGridAdapter(movies)    ║
+         ║                                                        ║
+         ║  ItemDecoration sugerida:                             ║
+         ║    GridSpacingItemDecoration(spans=3, spacing=8dp)    ║
+         ╚══════════════════════════════════════════════════════╝ -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMoviesGrid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        tools:listitem="@layout/item_movie_grid"
+        tools:itemCount="9"
+        tools:spanCount="3"
+        tools:layoutManager="GridLayoutManager" />
+
+</LinearLayout>
