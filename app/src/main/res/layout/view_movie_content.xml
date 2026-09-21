@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    view_movie_content.xml — MOOOVIE · Contenido común Today / Film
+    ═══════════════════════════════════════════════════════════════
+    Bloque reutilizable entre la pantalla TODAY y la pantalla FILM (detalle).
+    Contiene todo lo que está por DEBAJO del header + section label:
+
+      ├── [POSTER] imagen ancho completo, esquinas rectas
+      ├── [TÍTULO] grande bold negro (hasta 2 líneas)
+      ├── [SUBTÍTULO] gris: título original · año · país
+      ├── [DIVIDER] línea fina
+      ├── [SINOPSIS] párrafo
+      ├── [DIVIDER] línea fina
+      └── [ACCIONES] 3 botones cuadrados amarillos (ícono arriba + label)
+
+    Uso:  <include android:id="@+id/movieContent"
+                    layout="@layout/view_movie_content" />
+    Acceso por View Binding:  binding.movieContent.tvMovieTitle, etc.
+    Datos de ejemplo; se reemplazan por datos reales vía bind().
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- ── POSTER: ancho completo, esquinas rectas ──────────────── -->
+    <ImageView
+        android:id="@+id/ivPoster"
+        android:layout_width="match_parent"
+        android:layout_height="480dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/shape_poster_flat"
+        android:contentDescription="@string/cd_movie_poster"
+        tools:src="@tools:sample/backgrounds/scenic"
+        tools:ignore="ImageContrastCheck" />
+
+    <!-- ── TÍTULO: grande bold negro (hasta 2 líneas) ───────────── -->
+    <TextView
+        android:id="@+id/tvMovieTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="20dp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:text="@string/today_movie_title"
+        android:textAppearance="@style/TextAppearance.DM.TitleHero" />
+
+    <!-- ── SUBTÍTULO: título original · año · país ──────────────── -->
+    <TextView
+        android:id="@+id/tvMovieSubtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="6dp"
+        android:text="@string/today_movie_subtitle"
+        android:textSize="14sp"
+        android:textColor="@color/colorOnSurfaceMuted"
+        android:letterSpacing="0.01" />
+
+    <!-- ── DIVIDER ──────────────────────────────────────────────── -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="18dp"
+        android:background="@color/colorDivider" />
+
+    <!-- ── SINOPSIS ─────────────────────────────────────────────── -->
+    <TextView
+        android:id="@+id/tvSynopsis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp"
+        android:text="@string/today_synopsis"
+        android:textSize="15sp"
+        android:textColor="@color/colorOnBackground"
+        android:lineSpacingMultiplier="1.5" />
+
+    <!-- ── DIVIDER ──────────────────────────────────────────────── -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/colorDivider" />
+
+    <!-- ── ACCIONES: 3 botones cuadrados amarillos ──────────────── -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:baselineAligned="false"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="20dp"
+        android:weightSum="3">
+
+        <!-- Watch Trailer -->
+        <LinearLayout
+            android:id="@+id/btnWatchTrailer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/shape_action_button"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_action_play"
+                android:contentDescription="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/today_action_trailer"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorOnAccent"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <!-- Watchlist -->
+        <LinearLayout
+            android:id="@+id/btnWatchlist"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:background="@drawable/shape_action_button"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_action_bookmark"
+                android:contentDescription="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/today_action_watchlist"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorOnAccent"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <!-- Watched -->
+        <LinearLayout
+            android:id="@+id/btnWatched"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/shape_action_button"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_action_eye"
+                android:contentDescription="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/today_action_watched"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorOnAccent"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

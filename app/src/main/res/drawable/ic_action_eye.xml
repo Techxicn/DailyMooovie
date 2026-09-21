@@ -3,20 +3,19 @@
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
-    <!--
-        Persona — PROFILE
-        Cabeza (círculo) + cuerpo (arco inferior).
-        Sin tint a nivel de vector: el itemIconTint del BottomNav controla el color.
-    -->
-    <path
-        android:fillColor="@android:color/transparent"
-        android:strokeColor="#FF000000"
-        android:strokeWidth="1.8"
-        android:pathData="M12,4 A4,4 0 1,0 12,12 A4,4 0 1,0 12,4 Z" />
+    <!-- Ojo (outline negro) — botón "Watched" sobre fondo amarillo -->
+    <!-- Contorno del ojo -->
     <path
         android:fillColor="@android:color/transparent"
         android:strokeColor="#FF000000"
         android:strokeWidth="1.8"
         android:strokeLineCap="round"
-        android:pathData="M4,20 C4,15.58 7.58,12 12,12 C16.42,12 20,15.58 20,20" />
+        android:strokeLineJoin="round"
+        android:pathData="M2,12 C4.5,7 8,5 12,5 C16,5 19.5,7 22,12 C19.5,17 16,19 12,19 C8,19 4.5,17 2,12 Z" />
+    <!-- Iris -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="1.8"
+        android:pathData="M12,8.5 A3.5,3.5 0 1,0 12,15.5 A3.5,3.5 0 1,0 12,8.5 Z" />
 </vector>

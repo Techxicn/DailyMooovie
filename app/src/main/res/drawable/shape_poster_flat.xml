@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Placeholder plano para el poster ancho de Today.
+    Esquinas rectas (sin corners). Gris muy claro como fondo mientras se carga
+    la imagen real (Glide/Picasso) más adelante.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/colorSurfaceVariant" />
+</shape>

@@ -5,20 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.techxicn.dailymooovie.databinding.FragmentTodayBinding
-import com.techxicn.dailymooovie.model.TodayUiState
+import com.techxicn.dailymooovie.databinding.FragmentFilmBinding
+import com.techxicn.dailymooovie.model.FilmUiState
 
 /**
- * Tab TODAY — película del día.
+ * Pantalla FILM — detalle de una película.
+ *
+ * Reutiliza el mismo contenido visual que TODAY (view_movie_content), con un
+ * header propio de la película abierta y flecha "atrás".
+ *
+ * Se navega desde Catalog / Watchlist / Profile al tocar un poster.
  *
  * Conexión con backend:
- *   render(viewModel.todayState)   // TodayUiState producido por la lógica
+ *   render(viewModel.filmState)   // FilmUiState producido por la lógica
  *
  * Mientras no haya datos reales, render() usa el estado por defecto (placeholder).
  */
-class TodayFragment : Fragment() {
+class FilmFragment : Fragment() {
 
-    private var _binding: FragmentTodayBinding? = null
+    private var _binding: FragmentFilmBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -26,14 +31,17 @@ class TodayFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTodayBinding.inflate(inflater, container, false)
+        _binding = FragmentFilmBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // TODO: reemplazar por el estado del ViewModel cuando exista.
-        render(TodayUiState())
+        render(FilmUiState())
+
+        // Flecha atrás → vuelve al fragment anterior del back stack.
+        binding.btnBack.setOnClickListener { navigateBack() }
 
         // Nota (solo capa visual): los botones de acción (btnWatchTrailer,
         // btnWatchlist, btnWatched) quedan sin lógica; se conectarán al
@@ -41,7 +49,7 @@ class TodayFragment : Fragment() {
     }
 
     /** Punto único de entrada de datos a la pantalla. */
-    fun render(state: TodayUiState) {
+    fun render(state: FilmUiState) {
         binding.bind(state)
     }
 

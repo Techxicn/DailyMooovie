@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
+    // id("com.android.application")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -46,4 +48,16 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+    implementation(platform("com.google.firebase:firebase-bom:34.19.0"))
+    implementation("com.google.firebase:firebase-analytics")
+
+    // ── Autenticación ──────────────────────────────────────────
+    // Firebase Auth (email/password + signInWithCredential para Google).
+    implementation(libs.firebase.auth)
+    // Credential Manager + Google Identity Services (login con Google, API moderna).
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+    implementation(libs.kotlinx.coroutines.play.services)
+
 }

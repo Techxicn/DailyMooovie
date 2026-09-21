@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    fragment_register.xml — MOOOVIE · Crear cuenta (Sign Up)
+    ════════════════════════════════════════════════════════
+    Guía visual: fondo blanco, texto negro, acento amarillo, plano.
+
+    Estructura:
+      NestedScrollView
+        └── LinearLayout vertical
+              ├── [BRAND] "MOOOVIE"
+              ├── [TÍTULO] "Crea tu cuenta"
+              ├── [NAME] campo (hint "Nombre")
+              ├── [EMAIL] campo (hint "Correo electrónico")
+              ├── [PASSWORD] campo + ícono mostrar/ocultar
+              ├── [CONFIRM] campo (hint "Confirmar contraseña")
+              ├── [ERROR] feedback (gone por defecto)
+              ├── [REGISTRARME] botón amarillo ancho
+              ├── [SEPARADOR] "O continúa con"
+              ├── [GOOGLE] botón outline con logo
+              └── [GO LOGIN] "¿Ya tienes cuenta? Inicia sesión" (link amarillo/bold)
+-->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:fillViewport="true"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="48dp"
+        android:paddingBottom="32dp">
+
+        <!-- ── BRAND ────────────────────────────────────────────── -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/auth_brand"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccentYellow"
+            android:letterSpacing="0.12"
+            android:layout_marginBottom="32dp" />
+
+        <!-- ── TÍTULO ───────────────────────────────────────────── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register_title"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorOnBackground"
+            android:fontFamily="sans-serif"
+            android:layout_marginBottom="24dp" />
+
+        <!-- ── NAME ─────────────────────────────────────────────── -->
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@drawable/shape_input_field"
+            android:hint="@string/auth_hint_name"
+            android:inputType="textPersonName"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/colorOnBackground"
+            android:textColorHint="@color/colorOnSurfaceFaint"
+            android:textSize="15sp"
+            android:autofillHints="name"
+            android:importantForAutofill="yes" />
+
+        <!-- ── EMAIL ────────────────────────────────────────────── -->
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_input_field"
+            android:hint="@string/auth_hint_email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/colorOnBackground"
+            android:textColorHint="@color/colorOnSurfaceFaint"
+            android:textSize="15sp"
+            android:autofillHints="emailAddress"
+            android:importantForAutofill="yes" />
+
+        <!-- ── PASSWORD (con toggle mostrar/ocultar) ────────────── -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_input_field">
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="@string/auth_hint_password"
+                android:inputType="textPassword"
+                android:paddingStart="16dp"
+                android:paddingEnd="48dp"
+                android:textColor="@color/colorOnBackground"
+                android:textColorHint="@color/colorOnSurfaceFaint"
+                android:textSize="15sp"
+                android:autofillHints="newPassword"
+                android:importantForAutofill="yes" />
+
+            <ImageView
+                android:id="@+id/btnTogglePassword"
+                android:layout_width="44dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:padding="12dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_eye_off"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="@string/cd_toggle_password" />
+
+        </FrameLayout>
+
+        <!-- ── CONFIRM PASSWORD ─────────────────────────────────── -->
+        <EditText
+            android:id="@+id/etPasswordConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_input_field"
+            android:hint="@string/auth_hint_password_confirm"
+            android:inputType="textPassword"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/colorOnBackground"
+            android:textColorHint="@color/colorOnSurfaceFaint"
+            android:textSize="15sp"
+            android:autofillHints="newPassword"
+            android:importantForAutofill="yes" />
+
+        <!-- ── ERROR / FEEDBACK ─────────────────────────────────── -->
+        <TextView
+            android:id="@+id/tvError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="#FFD32F2F"
+            android:textSize="13sp"
+            android:visibility="gone"
+            tools:text="Ese correo ya está registrado."
+            tools:visibility="visible" />
+
+        <!-- ── REGISTRARME (botón amarillo ancho) ───────────────── -->
+        <FrameLayout
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_action_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <TextView
+                android:id="@+id/tvRegisterLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/register_button"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorOnAccent" />
+
+            <ProgressBar
+                android:id="@+id/progressRegister"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/colorOnAccent"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
+        <!-- ── SEPARADOR "O continúa con" ───────────────────────── -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@color/colorDivider" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:text="@string/auth_or_continue_with"
+                android:textColor="@color/colorOnSurfaceMuted"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@color/colorDivider" />
+
+        </LinearLayout>
+
+        <!-- ── GOOGLE (botón outline) ───────────────────────────── -->
+        <LinearLayout
+            android:id="@+id/btnGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@drawable/shape_button_outline"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_google"
+                android:contentDescription="@string/cd_google_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/auth_google_button"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorOnBackground" />
+
+        </LinearLayout>
+
+        <!-- ── LINK A LOGIN: "¿Ya tienes cuenta? Inicia sesión" ──── -->
+        <LinearLayout
+            android:id="@+id/btnGoLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginTop="28dp"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/register_have_account"
+                android:textColor="@color/colorOnSurfaceMuted"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/register_sign_in_link"
+                android:textColor="@color/colorAccentYellow"
+                android:textStyle="bold"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

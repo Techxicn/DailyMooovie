@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Bottom navigation — MOOOVIE (4 íconos):
+      1. Today    (play)
+      2. Catalog  (grid)   → navExplore
+      3. Watchlist(stack)  → navMovies
+      4. Profile  (persona)
+-->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
@@ -10,11 +17,6 @@
         android:id="@+id/navExplore"
         android:icon="@drawable/ic_nav_explore"
         android:title="@string/nav_explore" />
-
-    <item
-        android:id="@+id/navJourney"
-        android:icon="@drawable/ic_nav_journey"
-        android:title="@string/nav_journey" />
 
     <item
         android:id="@+id/navMovies"

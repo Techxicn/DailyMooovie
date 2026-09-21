@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    item_catalog_movie.xml — MOOOVIE · Celda del grid de Film Catalog
+    ═════════════════════════════════════════════════════════════════
+    RecyclerView con GridLayoutManager(spanCount=3). Ancho: match_parent
+    dentro de la celda. Diseño plano blanco/negro.
+
+    Layout vertical:
+      [fecha pequeña]      tvItemDate   — "22 SEP 2026"
+      [poster 2:3 recto]   ivItemPoster
+      [título truncado]    tvItemTitle  — bold negro, 1 línea, ellipsize end
+      [estado gris]        tvItemStatus — "Watched" / "Not Watched"
+
+    Se llena dinámicamente desde el adapter con datos reales del mes.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp"
+    android:paddingBottom="16dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?attr/selectableItemBackground">
+
+    <!-- Fecha pequeña sobre el poster -->
+    <TextView
+        android:id="@+id/tvItemDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="22 SEP 2026"
+        android:textSize="9sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorOnSurfaceMuted"
+        android:letterSpacing="0.04"
+        android:textAllCaps="true"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:ignore="HardcodedText" />
+
+    <!-- Poster 2:3, esquinas rectas -->
+    <ImageView
+        android:id="@+id/ivItemPoster"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:minHeight="150dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/shape_poster_flat"
+        android:contentDescription="@string/cd_movie_poster"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <!-- Título truncado -->
+    <TextView
+        android:id="@+id/tvItemTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="The Girl with the..."
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorOnBackground"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:ignore="HardcodedText" />
+
+    <!-- Estado (Watched / Not Watched) -->
+    <TextView
+        android:id="@+id/tvItemStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="Watched"
+        android:textSize="11sp"
+        android:textColor="@color/colorOnSurfaceMuted"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:ignore="HardcodedText" />
+
+</LinearLayout>

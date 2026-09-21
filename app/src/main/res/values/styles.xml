@@ -2,82 +2,95 @@
 <resources>
 
     <!-- ══════════════════════════════════════════════════════════
+         MOOOVIE — Estilos (blanco / amarillo / plano)
          TEXT APPEARANCES
          Uso: android:textAppearance="@style/TextAppearance.DM.xxx"
     ══════════════════════════════════════════════════════════════ -->
 
-    <!-- Título Hero — portada de película, TODAY pick. 48sp bold condensed -->
+    <!-- Título Hero — portada de película, TODAY pick. Sans-serif bold grande, negro -->
     <style name="TextAppearance.DM.TitleHero" parent="TextAppearance.Material3.DisplaySmall">
-        <item name="android:textSize">48sp</item>
+        <item name="android:textSize">40sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorOnBackground</item>
         <item name="android:letterSpacing">-0.02</item>
-        <item name="android:lineSpacingMultiplier">0.9</item>
-        <item name="fontFamily">sans-serif-condensed</item>
+        <item name="android:lineSpacingMultiplier">0.95</item>
+        <item name="fontFamily">sans-serif</item>
     </style>
 
-    <!-- Título de pantalla / header centrado. 20sp bold uppercase -->
+    <!-- Título de pantalla / header. 22sp bold, negro -->
     <style name="TextAppearance.DM.ScreenTitle" parent="TextAppearance.Material3.TitleLarge">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorOnBackground</item>
-        <item name="android:letterSpacing">0.08</item>
-        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="fontFamily">sans-serif</item>
     </style>
 
-    <!-- Título de tarjeta de película. 16sp bold -->
+    <!-- Título de tarjeta de película. 16sp bold negro -->
     <style name="TextAppearance.DM.TitleCard" parent="TextAppearance.Material3.TitleMedium">
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorOnSurface</item>
-        <item name="android:letterSpacing">0.01</item>
-        <item name="fontFamily">sans-serif-condensed</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="fontFamily">sans-serif</item>
     </style>
 
-    <!-- Label de sección — "YOUR TOP FIVE", "RECENTLY". 11sp caps, letra espaciada -->
-    <style name="TextAppearance.DM.SectionLabel" parent="TextAppearance.Material3.LabelSmall">
-        <item name="android:textSize">11sp</item>
+    <!-- Label de sección — "Mooovie of the day!", "Your Profile".
+         Amarillo, bold, tamaño legible (no all-caps, estilo Mooovie) -->
+    <style name="TextAppearance.DM.SectionLabel" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textSize">15sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/colorOnSurfaceMuted</item>
-        <item name="android:letterSpacing">0.18</item>
-        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorAccentYellow</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="fontFamily">sans-serif</item>
     </style>
 
-    <!-- Texto de cuerpo — sinopsis, descripciones. 14sp regular -->
+    <!-- Texto de cuerpo — sinopsis, descripciones. 14sp gris -->
     <style name="TextAppearance.DM.Body" parent="TextAppearance.Material3.BodyMedium">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/colorOnSurfaceMuted</item>
         <item name="android:lineSpacingMultiplier">1.4</item>
     </style>
 
-    <!-- Metadata de película — año, género, duración. 12sp -->
+    <!-- Metadata de película — año, género, duración. 12sp gris -->
     <style name="TextAppearance.DM.Metadata" parent="TextAppearance.Material3.BodySmall">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/colorOnSurfaceMuted</item>
         <item name="android:letterSpacing">0.02</item>
     </style>
 
-    <!-- Rating numérico — "8.1". 14sp bold acento naranja -->
+    <!-- Rating numérico — "8.1". 14sp bold, negro (estrella amarilla aparte) -->
     <style name="TextAppearance.DM.Rating" parent="TextAppearance.Material3.LabelMedium">
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/colorAccentOrange</item>
+        <item name="android:textColor">@color/colorOnSurface</item>
     </style>
 
-    <!-- Chip / etiqueta de género. 11sp -->
+    <!-- Chip / etiqueta de género. 11sp gris -->
     <style name="TextAppearance.DM.Chip" parent="TextAppearance.Material3.LabelSmall">
         <item name="android:textSize">11sp</item>
         <item name="android:textColor">@color/colorOnSurfaceMuted</item>
         <item name="android:letterSpacing">0.04</item>
     </style>
 
-    <!-- Acción / "SEE ALL". 11sp bold rojo -->
+    <!-- Acción / "SEE ALL". 11sp bold, negro -->
     <style name="TextAppearance.DM.Action" parent="TextAppearance.Material3.LabelSmall">
         <item name="android:textSize">11sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/colorAccentRed</item>
-        <item name="android:letterSpacing">0.08</item>
+        <item name="android:textColor">@color/colorOnSurface</item>
+        <item name="android:letterSpacing">0.04</item>
         <item name="android:textAllCaps">true</item>
+    </style>
+
+    <!-- Contador de posición X/Y — "265/365". Esquina superior derecha.
+         Bold, negro, alineado a la derecha. -->
+    <style name="TextAppearance.DM.Counter" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorOnBackground</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="fontFamily">sans-serif</item>
     </style>
 
 
@@ -85,8 +98,8 @@
          WIDGET STYLES
     ══════════════════════════════════════════════════════════════ -->
 
-    <!-- Tarjeta estándar de película (CardView) -->
-    <style name="Widget.DM.Card" parent="Widget.Material3.CardView.Elevated">
+    <!-- Tarjeta estándar (plana, sin sombra ni relleno oscuro) -->
+    <style name="Widget.DM.Card" parent="Widget.Material3.CardView.Filled">
         <item name="cardBackgroundColor">@color/colorSurface</item>
         <item name="cardCornerRadius">12dp</item>
         <item name="cardElevation">0dp</item>
@@ -98,14 +111,22 @@
         <item name="cardCornerRadius">8dp</item>
     </style>
 
-    <!-- Separador de sección — View horizontal 1dp -->
+    <!-- Separador de sección — View horizontal 1dp gris -->
     <style name="Widget.DM.Divider" parent="">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:background">@color/colorDivider</item>
     </style>
 
-    <!-- Header de pantalla (Toolbar) -->
+    <!-- Línea horizontal amarilla que se extiende a la derecha del label de sección -->
+    <style name="Widget.DM.SectionLine" parent="">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">@color/colorDividerYellow</item>
+        <item name="android:layout_marginStart">12dp</item>
+    </style>
+
+    <!-- Header de pantalla (Toolbar) plano blanco -->
     <style name="Widget.DM.Toolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:background">@color/colorBackground</item>
         <item name="android:minHeight">56dp</item>
@@ -113,18 +134,27 @@
         <item name="contentInsetStartWithNavigation">0dp</item>
     </style>
 
-    <!-- BottomNavigationView -->
+    <!-- Indicador de ítem activo del bottom nav (píldora amarillo oscuro) -->
+    <style name="Widget.DM.BottomNav.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/colorAccentYellowDark</item>
+        <item name="android:width">56dp</item>
+        <item name="android:height">32dp</item>
+        <item name="marginHorizontal">4dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Material3.Corner.Full</item>
+    </style>
+
+    <!-- BottomNavigationView — amarillo, íconos negros, sin elevación -->
     <style name="Widget.DM.BottomNav" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="android:background">@color/colorSurfaceElevated</item>
+        <item name="android:background">@color/colorAccentYellow</item>
         <item name="itemIconTint">@color/selector_nav_tint</item>
         <item name="itemTextColor">@color/selector_nav_tint</item>
         <item name="itemTextAppearanceActive">@style/TextAppearance.DM.SectionLabel</item>
         <item name="itemTextAppearanceInactive">@style/TextAppearance.DM.SectionLabel</item>
         <item name="labelVisibilityMode">labeled</item>
-        <item name="elevation">8dp</item>
+        <item name="elevation">0dp</item>
     </style>
 
-    <!-- Chip de género reutilizable -->
+    <!-- Chip de género reutilizable (plano gris claro) -->
     <style name="Widget.DM.GenreChip" parent="Widget.Material3.Chip.Filter">
         <item name="android:textAppearance">@style/TextAppearance.DM.Chip</item>
         <item name="chipBackgroundColor">@color/colorSurfaceVariant</item>
@@ -134,17 +164,18 @@
         <item name="android:paddingEnd">10dp</item>
     </style>
 
-    <!-- Botón de acción primaria (rojo) -->
+    <!-- Botón de acción primaria (amarillo, texto negro) -->
     <style name="Widget.DM.Button.Primary" parent="Widget.Material3.Button">
-        <item name="backgroundTint">@color/colorAccentRed</item>
-        <item name="android:textColor">@color/colorOnBackground</item>
+        <item name="backgroundTint">@color/colorAccentYellow</item>
+        <item name="android:textColor">@color/colorOnAccent</item>
         <item name="cornerRadius">8dp</item>
+        <item name="elevation">0dp</item>
     </style>
 
     <!-- Botón outline secundario -->
     <style name="Widget.DM.Button.Outline" parent="Widget.Material3.Button.OutlinedButton">
         <item name="strokeColor">@color/colorDivider</item>
-        <item name="android:textColor">@color/colorOnSurfaceMuted</item>
+        <item name="android:textColor">@color/colorOnBackground</item>
         <item name="cornerRadius">8dp</item>
     </style>
 
@@ -153,7 +184,7 @@
          LAYOUTS BASE REUTILIZABLES
     ══════════════════════════════════════════════════════════════ -->
 
-    <!-- Fondo de pantalla completa -->
+    <!-- Fondo de pantalla completa (blanco) -->
     <style name="Layout.DM.Screen" parent="">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>

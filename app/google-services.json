@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "762757228262",
+    "firebase_url": "https://dailymooovie-default-rtdb.firebaseio.com",
+    "project_id": "dailymooovie",
+    "storage_bucket": "dailymooovie.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762757228262:android:af9369808235d06b41fd27",
+        "android_client_info": {
+          "package_name": "com.techxicn.dailymooovie"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4v_Tg6UzCINiDDXte2yazYh4gfj933mA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

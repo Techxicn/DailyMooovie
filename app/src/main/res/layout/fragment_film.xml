@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    fragment_today.xml — MOOOVIE · Pantalla TODAY / Daily Film (home)
-    ════════════════════════════════════════════════════════════════
-    Diseño: fondo blanco, texto negro, acento amarillo, plano (sin sombras).
-    Tab activo en bottom nav: ícono de play (Today).
+    fragment_film.xml — MOOOVIE · Pantalla FILM (detalle de película)
+    ═════════════════════════════════════════════════════════════════
+    Reutiliza EXACTAMENTE el mismo contenido que TODAY (view_movie_content):
+    poster + título + subtítulo + sinopsis + 3 botones amarillos.
+
+    Diferencias respecto a Today:
+      • Flecha "atrás" en la esquina superior (se navega desde Catalog/Watchlist/Profile).
+      • Section label: "Mooovie of that day!" (referencia a la fecha de ESA película).
+      • Fecha + contador del header corresponden a la película abierta, no a hoy.
 
     Estructura:
       NestedScrollView
         └── LinearLayout vertical
-              ├── [HEADER] fecha (izq) + contador X/Y (der)
-              ├── [SECTION] label amarillo "Mooovie of the day!" + línea que se extiende
-              └── <include view_movie_content>  (poster + título + subtítulo + sinopsis + botones)
-
-    El contenido de película se comparte con la pantalla FILM vía view_movie_content.xml.
+              ├── [HEADER] flecha atrás + fecha (izq) + contador X/Y (der)
+              ├── [SECTION] label amarillo "Mooovie of that day!" + línea que se extiende
+              └── <include view_movie_content>
 -->
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -29,43 +32,58 @@
         android:orientation="vertical"
         android:paddingBottom="24dp">
 
-        <!-- ── HEADER: fecha (izq) + contador X/Y (der) ─────────── -->
+        <!-- ── HEADER: flecha atrás + fecha (izq) + contador X/Y (der) ── -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:baselineAligned="false"
-            android:paddingStart="20dp"
+            android:paddingStart="12dp"
             android:paddingEnd="20dp"
-            android:paddingTop="20dp"
+            android:paddingTop="14dp"
             android:paddingBottom="16dp">
 
+            <!-- Flecha atrás -->
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="9dp"
+                android:src="@drawable/ic_back"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="@string/cd_back" />
+
+            <!-- Fecha de la película abierta -->
             <TextView
                 android:id="@+id/tvDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/today_date"
+                android:layout_marginStart="6dp"
+                android:text="@string/film_date"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorOnBackground"
                 android:letterSpacing="0.06"
                 android:textAllCaps="true" />
 
+            <!-- Contador de la película abierta -->
             <TextView
                 android:id="@+id/tvPositionCounter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
-                android:text="@string/today_counter"
+                android:text="@string/film_counter"
                 android:textAppearance="@style/TextAppearance.DM.Counter" />
 
         </LinearLayout>
 
-        <!-- ── SECTION LABEL: "Mooovie of the day!" + línea amarilla ── -->
+        <!-- ── SECTION LABEL: "Mooovie of that day!" + línea amarilla ── -->
         <LinearLayout
-            android:id="@+id/sectionHeaderToday"
+            android:id="@+id/sectionHeaderFilm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -79,7 +97,7 @@
                 android:id="@+id/tvSectionLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/today_section_label"
+                android:text="@string/film_section_label"
                 android:textAppearance="@style/TextAppearance.DM.SectionLabel" />
 
             <View
@@ -88,7 +106,7 @@
 
         </LinearLayout>
 
-        <!-- ── CONTENIDO DE PELÍCULA (compartido con FILM) ──────── -->
+        <!-- ── CONTENIDO DE PELÍCULA (compartido con TODAY) ─────── -->
         <include
             android:id="@+id/movieContent"
             layout="@layout/view_movie_content" />

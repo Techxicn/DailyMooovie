@@ -2,26 +2,28 @@
     android:width="24dp"
     android:height="24dp"
     android:viewportWidth="24"
-    android:viewportHeight="24"
-    android:tint="?attr/colorControlNormal">
+    android:viewportHeight="24">
     <!--
-        Grid 2×2 — MIS PELÍCULAS
-        Cuatro rectángulos redondeados representando posters
+        Capas / Stack — WATCHLIST (Mis Películas)
+        Tres capas apiladas en perspectiva.
+        Sin tint a nivel de vector: el itemIconTint del BottomNav controla el color.
     -->
-    <!-- Superior izquierdo -->
+    <!-- Capa superior (rombo) -->
     <path
-        android:fillColor="@color/white"
-        android:pathData="M3,3 Q3,3 3,4 L3,10 Q3,11 4,11 L10,11 Q11,11 11,10 L11,4 Q11,3 10,3 Z" />
-    <!-- Superior derecho -->
+        android:fillColor="#FF000000"
+        android:pathData="M12,3 L21,8 L12,13 L3,8 Z" />
+    <!-- Capa media -->
     <path
-        android:fillColor="@color/white"
-        android:pathData="M13,3 Q13,3 13,4 L13,10 Q13,11 14,11 L20,11 Q21,11 21,10 L21,4 Q21,3 20,3 Z" />
-    <!-- Inferior izquierdo -->
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="1.8"
+        android:strokeLineJoin="round"
+        android:pathData="M3,12 L12,17 L21,12" />
+    <!-- Capa inferior -->
     <path
-        android:fillColor="@color/white"
-        android:pathData="M3,13 Q3,13 3,14 L3,20 Q3,21 4,21 L10,21 Q11,21 11,20 L11,14 Q11,13 10,13 Z" />
-    <!-- Inferior derecho -->
-    <path
-        android:fillColor="@color/white"
-        android:pathData="M13,13 Q13,13 13,14 L13,20 Q13,21 14,21 L20,21 Q21,21 21,20 L21,14 Q21,13 20,13 Z" />
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="1.8"
+        android:strokeLineJoin="round"
+        android:pathData="M3,16 L12,21 L21,16" />
 </vector>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Header de sección reutilizable — MOOOVIE
+    Label en amarillo + línea horizontal amarilla que se extiende a la derecha.
+    Uso:  <include layout="@layout/view_section_header" />
+    Luego en código: view.findViewById<TextView>(R.id.tvSectionLabel).text = "..."
+    El texto por defecto es un placeholder; se sobrescribe con datos reales.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sectionHeader"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:baselineAligned="false">
+
+    <TextView
+        android:id="@+id/tvSectionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.DM.SectionLabel"
+        tools:text="Mooovie of the day!" />
+
+    <View
+        android:id="@+id/vSectionLine"
+        style="@style/Widget.DM.SectionLine" />
+
+</LinearLayout>

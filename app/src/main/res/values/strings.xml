@@ -4,65 +4,127 @@
     <!-- App -->
     <string name="app_name">DailyMooovie</string>
 
-    <!-- ── Bottom Navigation ───────────────────────────────────── -->
+    <!-- ── Bottom Navigation (4 íconos) ────────────────────────── -->
     <string name="nav_today">TODAY</string>
-    <string name="nav_explore">EXPLORE</string>
-    <string name="nav_journey">JOURNEY</string>
-    <string name="nav_movies">MIS PELÍCULAS</string>
+    <string name="nav_explore">CATALOG</string>
+    <string name="nav_movies">WATCHLIST</string>
     <string name="nav_profile">PROFILE</string>
 
-    <!-- ── Headers / Toolbar ──────────────────────────────────── -->
-    <string name="header_explore">EXPLORE</string>
-    <string name="header_journey">JOURNEY</string>
-    <string name="header_my_movies">MIS PELÍCULAS</string>
-    <string name="header_profile">PROFILE</string>
-    <string name="header_movie_detail">MOVIE DETAIL</string>
+    <!-- ── Today / Daily Film ─────────────────────────────────── -->
+    <string name="today_date">22 SEP 2026</string>
+    <string name="today_counter">265/365</string>
+    <string name="today_section_label">Mooovie of the day!</string>
+    <string name="today_movie_title">El Jardín de las Sombras</string>
+    <string name="today_movie_subtitle">The Garden of Shadows · 1988 · Argentina</string>
+    <string name="today_synopsis">En un pueblo olvidado por el tiempo, una joven jardinera descubre que las flores de su invernadero guardan los recuerdos de quienes ya no están. Mientras el otoño avanza, deberá decidir entre conservar el pasado o dejar que el jardín florezca de nuevo. Una fábula melancólica sobre la memoria, la pérdida y la esperanza que renace con cada estación.</string>
+    <string name="today_action_trailer">Watch Trailer</string>
+    <string name="today_action_watchlist">Watchlist</string>
+    <string name="today_action_watched">Watched</string>
 
-    <!-- ── Section Labels (separadores) ──────────────────────── -->
-    <string name="section_your_top_five">YOUR TOP FIVE</string>
-    <string name="section_recently">RECENTLY</string>
-    <string name="section_trending">TRENDING</string>
-    <string name="section_new_releases">NEW RELEASES</string>
-    <string name="section_genres">GENRES</string>
-    <string name="section_watched">WATCHED</string>
-    <string name="section_watchlist">WATCHLIST</string>
-    <string name="section_favorites">FAVORITES</string>
-    <string name="section_stats">MY STATS</string>
+    <!-- ── Film (detalle de película) ────────────────────────── -->
+    <string name="film_section_label">Mooovie of that day!</string>
+    <string name="film_date">14 MAR 1988</string>
+    <string name="film_counter">073/365</string>
+    <string name="cd_back">Volver</string>
 
-    <!-- ── Acciones generales ─────────────────────────────────── -->
-    <string name="action_share">Share</string>
-    <string name="action_back">Back</string>
-    <string name="action_add_watchlist">Add to Watchlist</string>
-    <string name="action_mark_watched">Mark as Watched</string>
-    <string name="action_rate">Rate</string>
-    <string name="action_see_all">SEE ALL</string>
+    <!-- ── Film Catalog ──────────────────────────────────────── -->
+    <string name="catalog_section_label">Mooovies of the years!</string>
+    <string name="catalog_counter">05/30</string>
+    <string name="catalog_month">SEPTEMBER 2026</string>
+    <string name="catalog_status_watched">Watched</string>
+    <string name="catalog_status_not_watched">Not Watched</string>
+    <string name="cd_prev_month">Mes anterior</string>
+    <string name="cd_next_month">Mes siguiente</string>
 
-    <!-- ── Placeholders / sample data ────────────────────────── -->
-    <string name="placeholder_movie_title">The Grand Illusion</string>
-    <string name="placeholder_movie_year">1937</string>
-    <string name="placeholder_movie_genre">Drama · War</string>
-    <string name="placeholder_movie_rating">8.1</string>
-    <string name="placeholder_movie_duration">1h 54min</string>
-    <string name="placeholder_movie_overview">A film about the nature of class distinctions and the absurdity of war, told through the story of prisoners of war during World War I.</string>
-    <string name="placeholder_director">Jean Renoir</string>
-    <string name="placeholder_today_label">TODAY\'S PICK</string>
-    <string name="placeholder_today_date">September 13</string>
+    <!-- ── Watchlist ─────────────────────────────────────────── -->
+    <string name="watchlist_count">12 Moovies in your Watchlist</string>
+    <string name="watchlist_counter">01/12</string>
+    <string name="watchlist_section_label">Your Watchlist</string>
+
+    <!-- ── Profile ───────────────────────────────────────────── -->
+    <string name="profile_section_label">Your Profile</string>
+    <string name="profile_name">Juan Antonio</string>
+    <string name="profile_name_fallback">Cinéfilo</string>
+    <string name="profile_avatar_initial">J</string>
+    <string name="profile_role">Movie Critic</string>
+    <string name="profile_watched_count">230 Moovies watched</string>
+    <string name="profile_stat_year_value">189</string>
+    <string name="profile_stat_year_label">Mooovies watched this year</string>
+    <string name="profile_stat_current_value">5</string>
+    <string name="profile_stat_current_label">Current Streak</string>
+    <string name="profile_stat_longest_value">40</string>
+    <string name="profile_stat_longest_label">Longest Streak</string>
+    <string name="profile_discoveries_title">Juan Antonio\'s Mooovie Discoveries</string>
+    <string name="profile_discoveries_title_fmt">%1$s\'s Mooovie Discoveries</string>
+    <string name="profile_sign_out">Cerrar sesión</string>
+    <string name="cd_achievements">Logros</string>
+    <string name="cd_settings">Ajustes</string>
 
     <!-- ── Accesibilidad ──────────────────────────────────────── -->
     <string name="cd_movie_poster">Movie poster</string>
-    <string name="cd_back_button">Go back</string>
     <string name="cd_share_button">Share</string>
-    <string name="cd_nav_today">Navigate to Today</string>
-    <string name="cd_nav_explore">Navigate to Explore</string>
-    <string name="cd_nav_journey">Navigate to Journey</string>
-    <string name="cd_nav_movies">Navigate to My Movies</string>
-    <string name="cd_nav_profile">Navigate to Profile</string>
 
-    <!-- Legacy (no borrar) -->
-    <string name="option1">TODAY</string>
-    <string name="option2">EXPLORE</string>
-    <string name="option3">JOURNEY</string>
-    <string name="option4">MIS PELÍCULAS</string>
-    <string name="option5">PROFILE</string>
+    <!-- ══════════════════════════════════════════════════════════
+         AUTENTICACIÓN (Firebase Auth + Google Credential Manager)
+    ══════════════════════════════════════════════════════════════ -->
+
+    <!--
+        default_web_client_id: ID de cliente OAuth de tipo WEB del proyecto Firebase.
+        Necesario para obtener el ID token de Google vía Credential Manager.
+
+        CÓMO OBTENERLO:
+          1. Firebase Console → Authentication → Sign-in method → habilitar "Google".
+             Esto crea automáticamente un OAuth client de tipo Web (client_type 3).
+          2. Descargar el google-services.json actualizado (tendrá el oauth_client),
+             o copiar el "Web client ID" desde Google Cloud Console → APIs y servicios
+             → Credenciales → "Web client (auto created by Google Service)".
+          3. Pegar ese valor aquí (formato: NNNN-xxxx.apps.googleusercontent.com).
+
+        Mientras esté como placeholder, el login con Google mostrará un error claro;
+        el login con email/contraseña funciona sin este valor.
+    -->
+    <string name="default_web_client_id" translatable="false">TODO_REEMPLAZAR_WEB_CLIENT_ID.apps.googleusercontent.com</string>
+
+    <!-- ── Login / Registro — textos ─────────────────────────── -->
+    <string name="auth_brand">MOOOVIE</string>
+    <string name="auth_brand_prefix">Moo</string>
+    <string name="auth_brand_accent">ovie</string>
+    <string name="login_section_label">Welcome back!</string>
+    <string name="login_title">Inicia sesión</string>
+    <string name="register_section_label">Join Mooovie!</string>
+    <string name="register_title">Crea tu cuenta</string>
+
+    <string name="auth_hint_name">Nombre</string>
+    <string name="auth_hint_email">Correo electrónico</string>
+    <string name="auth_hint_password">Contraseña</string>
+    <string name="auth_hint_password_confirm">Confirmar contraseña</string>
+
+    <string name="login_button">Iniciar sesión</string>
+    <string name="login_forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="register_button">Registrarme</string>
+    <string name="auth_google_button">Continuar con Google</string>
+    <string name="auth_or">or</string>
+    <string name="auth_or_continue_with">O continúa con</string>
+
+    <string name="login_go_register">Don\'t have an account? Sign up</string>
+    <string name="register_go_login">Already have an account? Sign in</string>
+    <string name="register_have_account">¿Ya tienes cuenta? </string>
+    <string name="register_sign_in_link">Inicia sesión</string>
+    <string name="login_no_account">¿No tienes cuenta? </string>
+    <string name="login_sign_up_link">Regístrate</string>
+
+    <!-- ── Login / Registro — errores / feedback ─────────────── -->
+    <string name="auth_error_empty_fields">Completa todos los campos.</string>
+    <string name="auth_error_invalid_email">Correo electrónico no válido.</string>
+    <string name="auth_error_short_password">La contraseña debe tener al menos 6 caracteres.</string>
+    <string name="auth_error_password_mismatch">Las contraseñas no coinciden.</string>
+    <string name="auth_error_email_in_use">Ese correo ya está registrado.</string>
+    <string name="auth_error_invalid_credentials">Correo o contraseña incorrectos.</string>
+    <string name="auth_error_google_config">Google Sign-In no está configurado (falta el Web client ID).</string>
+    <string name="auth_error_google_cancelled">Inicio de sesión con Google cancelado.</string>
+    <string name="auth_error_generic">Algo salió mal. Inténtalo de nuevo.</string>
+
+    <string name="cd_google_logo">Logo de Google</string>
+    <string name="cd_toggle_password">Mostrar u ocultar contraseña</string>
 
 </resources>

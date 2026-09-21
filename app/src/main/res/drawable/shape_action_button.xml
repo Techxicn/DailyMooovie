@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Fondo del avatar de perfil — MOOOVIE.
-    Cuadrado amarillo con esquinas apenas redondeadas (plano).
-    La inicial del nombre va en negro grande y bold encima.
+    Botón de acción cuadrado amarillo plano — Today (Watch Trailer / Watchlist / Watched).
+    Sin sombra; esquinas apenas redondeadas para look plano.
 -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <solid android:color="@color/colorAccentYellow" />
-    <corners android:radius="8dp" />
+    <corners android:radius="6dp" />
 </shape>

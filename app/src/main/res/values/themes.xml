@@ -2,18 +2,18 @@
 <resources>
 
     <!--
-        DailyMooovie usa dark mode FIJO independientemente del modo del sistema.
-        Ambos temas (day/night) apuntan al mismo estilo oscuro.
+        MOOOVIE usa light mode FIJO independientemente del modo del sistema.
+        Ambos temas (day/night) apuntan al mismo estilo claro plano.
     -->
 
-    <style name="Base.Theme.DailyMooovie" parent="Theme.Material3.Dark.NoActionBar">
+    <style name="Base.Theme.DailyMooovie" parent="Theme.Material3.Light.NoActionBar">
 
-        <!-- Color primario → rojo acento -->
-        <item name="colorPrimary">@color/colorAccentRed</item>
-        <item name="colorPrimaryVariant">@color/colorAccentOrange</item>
-        <item name="colorOnPrimary">@color/colorOnBackground</item>
+        <!-- Color primario → amarillo acento -->
+        <item name="colorPrimary">@color/colorAccentYellow</item>
+        <item name="colorPrimaryVariant">@color/colorAccentYellowDark</item>
+        <item name="colorOnPrimary">@color/colorOnAccent</item>
 
-        <!-- Superficies -->
+        <!-- Superficies (planas, blancas) -->
         <item name="colorSurface">@color/colorSurface</item>
         <item name="colorSurfaceVariant">@color/colorSurfaceVariant</item>
         <item name="colorOnSurface">@color/colorOnSurface</item>
@@ -23,11 +23,11 @@
         <item name="android:colorBackground">@color/colorBackground</item>
         <item name="android:windowBackground">@color/colorBackground</item>
 
-        <!-- Status & navigation bar -->
+        <!-- Status & navigation bar (fondo claro → íconos oscuros) -->
         <item name="android:statusBarColor">@color/colorBackground</item>
-        <item name="android:navigationBarColor">@color/colorSurfaceElevated</item>
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:navigationBarColor">@color/colorAccentYellow</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
 
         <!-- Texto -->
         <item name="android:textColorPrimary">@color/colorOnBackground</item>
@@ -37,8 +37,8 @@
         <!-- Divider / separadores -->
         <item name="dividerHorizontal">@color/colorDivider</item>
 
-        <!-- Ripple sobre superficies oscuras -->
-        <item name="colorControlHighlight">@color/colorAccentRedDim</item>
+        <!-- Ripple sobre superficies claras -->
+        <item name="colorControlHighlight">@color/colorAccentYellowDim</item>
 
     </style>
 

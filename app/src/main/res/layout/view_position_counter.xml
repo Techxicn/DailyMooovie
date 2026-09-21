@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Contador de posición X/Y reutilizable — MOOOVIE
+    Aparece en la esquina superior derecha de varias pantallas
+    (ej. "265/365" en Today, "05/30" en Catalog, "01/12" en Watchlist).
+    Texto simple alineado a la derecha; se llena con datos reales más adelante.
+    Uso:  <include layout="@layout/view_position_counter" />
+-->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tvPositionCounter"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="end"
+    android:textAppearance="@style/TextAppearance.DM.Counter"
+    tools:text="265/365" />

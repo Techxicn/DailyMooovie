@@ -1,47 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- ── Backgrounds ─────────────────────────────────────────── -->
-    <color name="colorBackground">#FF0D0D0D</color>         <!-- fondo global app -->
-    <color name="colorSurface">#FF1A1A1A</color>            <!-- tarjetas / sheets -->
-    <color name="colorSurfaceVariant">#FF242424</color>     <!-- chips / items secundarios -->
-    <color name="colorSurfaceElevated">#FF2E2E2E</color>    <!-- navbar / overlays -->
+    <!-- ══════════════════════════════════════════════════════════
+         MOOOVIE — Sistema de diseño BLANCO / AMARILLO / PLANO
+         Fondo blanco · texto negro · acento amarillo · sin sombras
+    ══════════════════════════════════════════════════════════════ -->
 
-    <!-- ── Acentos ─────────────────────────────────────────────── -->
-    <color name="colorAccentRed">#FFE63946</color>          <!-- rojo primario (activo nav, CTA) -->
-    <color name="colorAccentOrange">#FFFF6B35</color>       <!-- naranja acento (ratings, chips) -->
-    <color name="colorAccentRedDim">#33E63946</color>       <!-- rojo translúcido (badges, scrim) -->
+    <!-- ── Acento Amarillo (marca) ─────────────────────────────── -->
+    <color name="colorAccentYellow">#FFFFC700</color>       <!-- amarillo primario Mooovie -->
+    <color name="colorAccentYellowDim">#33FFC700</color>    <!-- amarillo translúcido (ripple) -->
+    <color name="colorAccentYellowDark">#FFE6B400</color>   <!-- amarillo hover / borde / indicador nav -->
+
+    <!-- ── Backgrounds / Surfaces ──────────────────────────────── -->
+    <color name="colorBackground">#FFFFFFFF</color>         <!-- fondo global app: blanco -->
+    <color name="colorSurface">#FFFFFFFF</color>            <!-- superficies: blanco plano -->
+    <color name="colorSurfaceVariant">#FFF4F4F4</color>     <!-- chips / posters placeholder: gris muy claro -->
 
     <!-- ── Texto ───────────────────────────────────────────────── -->
-    <color name="colorOnBackground">#FFFFFFFF</color>       <!-- texto primario sobre fondo -->
-    <color name="colorOnSurface">#FFFFFFFF</color>          <!-- texto primario sobre tarjeta -->
-    <color name="colorOnSurfaceMuted">#FF8A8A8A</color>     <!-- texto secundario / subtítulos -->
-    <color name="colorOnSurfaceFaint">#FF4D4D4D</color>     <!-- placeholders / texto deshabilitado -->
+    <color name="colorOnBackground">#FF000000</color>       <!-- texto primario: negro -->
+    <color name="colorOnSurface">#FF000000</color>          <!-- texto sobre superficie: negro -->
+    <color name="colorOnSurfaceMuted">#FF6B6B6B</color>     <!-- texto secundario / subtítulos: gris -->
+    <color name="colorOnSurfaceFaint">#FFB0B0B0</color>     <!-- placeholders / deshabilitado -->
+    <color name="colorOnAccent">#FF000000</color>           <!-- texto/icono sobre amarillo: negro -->
 
     <!-- ── Separadores ─────────────────────────────────────────── -->
-    <color name="colorDivider">#FF2E2E2E</color>            <!-- separadores finos -->
-
-    <!-- ── Estrellas / Rating ──────────────────────────────────── -->
-    <color name="colorStar">#FFFFD166</color>               <!-- amarillo estrellas -->
-
-    <!-- ── Heatmap (Journey) — estados semánticos por día ──────
-         Cada celda del heatmap usa uno de estos colores según el
-         estado que provea la lógica. Enlazar por android:tag="day_N".
-
-           heatmapEmpty      → sin datos: día antes del registro del
-                               usuario, o día sin recomendación. (gris claro)
-           heatmapUnseen     → recomendado pero NO visto. (gris oscuro)
-           heatmapSeenLow    → visto, intensidad baja.
-           heatmapSeenMid    → visto, intensidad media.
-           heatmapSeenHigh   → visto, intensidad alta.
-           heatmapDiscovered → descubierta / destacada. (naranja)
-    -->
-    <color name="heatmapEmpty">#FF3A3F44</color>            <!-- gris claro: sin datos / pre-registro -->
-    <color name="heatmapUnseen">#FF242424</color>           <!-- gris oscuro: recomendado, no visto -->
-    <color name="heatmapSeenLow">#4DE63946</color>          <!-- visto: baja intensidad -->
-    <color name="heatmapSeenMid">#99E63946</color>          <!-- visto: media intensidad -->
-    <color name="heatmapSeenHigh">#FFE63946</color>         <!-- visto: alta intensidad -->
-    <color name="heatmapDiscovered">#FFFF6B35</color>       <!-- descubierta / destacada -->
+    <color name="colorDivider">#FFE0E0E0</color>            <!-- líneas divisorias gris fino -->
+    <color name="colorDividerYellow">#FFFFC700</color>      <!-- línea divisoria amarilla (labels sección) -->
 
     <!-- ── Legacy (no borrar: referenciados por launcher) ────── -->
     <color name="black">#FF000000</color>
