@@ -43,9 +43,9 @@
 
     <!-- ── Profile ───────────────────────────────────────────── -->
     <string name="profile_section_label">Your Profile</string>
-    <string name="profile_name">Juan Antonio</string>
+    <string name="profile_name">Cinéfilo</string>
     <string name="profile_name_fallback">Cinéfilo</string>
-    <string name="profile_avatar_initial">J</string>
+    <string name="profile_avatar_initial">C</string>
     <string name="profile_role">Movie Critic</string>
     <string name="profile_watched_count">230 Moovies watched</string>
     <string name="profile_stat_year_value">189</string>
@@ -54,7 +54,7 @@
     <string name="profile_stat_current_label">Current Streak</string>
     <string name="profile_stat_longest_value">40</string>
     <string name="profile_stat_longest_label">Longest Streak</string>
-    <string name="profile_discoveries_title">Juan Antonio\'s Mooovie Discoveries</string>
+    <string name="profile_discoveries_title">Cinéfilo\'s Mooovie Discoveries</string>
     <string name="profile_discoveries_title_fmt">%1$s\'s Mooovie Discoveries</string>
     <string name="profile_sign_out">Cerrar sesión</string>
     <string name="cd_achievements">Logros</string>
@@ -63,6 +63,20 @@
     <!-- ── Accesibilidad ──────────────────────────────────────── -->
     <string name="cd_movie_poster">Movie poster</string>
     <string name="cd_share_button">Share</string>
+
+    <!-- ── Datos (Realtime Database) ──────────────────────────── -->
+    <string name="data_error_generic">No se pudo completar la acción. Inténtalo de nuevo.</string>
+    <string name="today_no_movie">No hay película programada para hoy.</string>
+    <string name="today_marked_watched">Marcada como vista</string>
+    <string name="today_added_watchlist">Agregada a tu watchlist</string>
+    <string name="watchlist_empty">Tu watchlist está vacía</string>
+    <string name="watchlist_count_fmt">%1$d Moovies in your Watchlist</string>
+    <string name="watchlist_remove_title">Quitar de tu watchlist</string>
+    <string name="watchlist_remove_message">¿Quitar \"%1$s\" de tu watchlist?</string>
+    <string name="watchlist_remove_confirm">Quitar</string>
+    <string name="watchlist_remove_cancel">Cancelar</string>
+    <string name="watchlist_removed">Película quitada de tu watchlist</string>
+    <string name="profile_watched_count_fmt">%1$d Moovies watched</string>
 
     <!-- ══════════════════════════════════════════════════════════
          AUTENTICACIÓN (Firebase Auth + Google Credential Manager)

@@ -29,6 +29,11 @@ androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview"
 # Firebase Auth (versión gestionada por el BoM declarado en app/build.gradle.kts)
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
 
+# Firebase Realtime Database (versión gestionada por el BoM). Las APIs KTX ya
+# están fusionadas en el módulo principal desde el BoM 32.5+, así que se usa el
+# artefacto base (sin sufijo -ktx).
+firebase-database = { group = "com.google.firebase", name = "firebase-database" }
+
 # Google Sign-In vía Credential Manager (API moderna, reemplaza GoogleSignInClient)
 androidx-credentials = { group = "androidx.credentials", name = "credentials", version.ref = "credentials" }
 androidx-credentials-play-services-auth = { group = "androidx.credentials", name = "credentials-play-services-auth", version.ref = "credentials" }

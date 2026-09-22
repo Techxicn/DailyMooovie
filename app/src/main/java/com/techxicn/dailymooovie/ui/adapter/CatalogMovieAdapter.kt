@@ -16,7 +16,8 @@ import com.techxicn.dailymooovie.model.CatalogMovieUi
  */
 class CatalogMovieAdapter(
     private val items: List<CatalogMovieUi>,
-    private val onItemClick: (CatalogMovieUi) -> Unit = {}
+    private val onItemClick: (CatalogMovieUi) -> Unit = {},
+    private val onItemLongClick: (CatalogMovieUi) -> Unit = {}
 ) : RecyclerView.Adapter<CatalogMovieAdapter.VH>() {
 
     inner class VH(val binding: ItemCatalogMovieBinding) :
@@ -40,6 +41,10 @@ class CatalogMovieAdapter(
                 else R.string.catalog_status_not_watched
             )
             root.setOnClickListener { onItemClick(item) }
+            root.setOnLongClickListener {
+                onItemLongClick(item)
+                true
+            }
             // ivItemPoster → cargar item.posterUrl con Glide/Picasso cuando exista.
         }
     }

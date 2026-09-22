@@ -53,11 +53,14 @@ dependencies {
 
     // ── Autenticación ──────────────────────────────────────────
     // Firebase Auth (email/password + signInWithCredential para Google).
-    implementation(libs.firebase.auth)
-    // Credential Manager + Google Identity Services (login con Google, API moderna).
+    implementation(libs.firebase.auth)    // Credential Manager + Google Identity Services (login con Google, API moderna).
     implementation(libs.androidx.credentials)
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.googleid)
     implementation(libs.kotlinx.coroutines.play.services)
+
+    // ── Datos (Realtime Database) ──────────────────────────────
+    // Realtime Database (KTX). Versión gestionada por el BoM de arriba.
+    implementation(libs.firebase.database)
 
 }

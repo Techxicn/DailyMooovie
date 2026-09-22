@@ -10,11 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.techxicn.dailymooovie.R
 import com.techxicn.dailymooovie.auth.AuthHost
 import com.techxicn.dailymooovie.auth.AuthManager
+import com.techxicn.dailymooovie.data.UserMovieRepository
 import com.techxicn.dailymooovie.databinding.FragmentProfileBinding
 import com.techxicn.dailymooovie.model.ProfileUiState
 import com.techxicn.dailymooovie.model.SampleData
 import com.techxicn.dailymooovie.ui.adapter.FavoritesAdapter
 import kotlinx.coroutines.launch
+import java.util.Calendar
 
 /**
  * Tab PROFILE — perfil del usuario.
@@ -33,6 +35,7 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var authManager: AuthManager
+    private val userRepo = UserMovieRepository()
     private val host get() = activity as? AuthHost
 
     override fun onCreateView(
@@ -51,7 +54,8 @@ class ProfileFragment : Fragment() {
         binding.rvDiscoveries.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        // Recarga el perfil desde Firebase y luego renderiza con el nombre real.
+        // Recarga el perfil desde Firebase y luego renderiza con el nombre real
+        // y las estadísticas reales del usuario (watched del año + streak).
         viewLifecycleOwner.lifecycleScope.launch {
             authManager.reloadUser()
             render(buildProfileState())
@@ -65,18 +69,35 @@ class ProfileFragment : Fragment() {
 
     /**
      * Construye el estado de Profile: nombre e inicial del usuario real de Firebase
-     * (displayName), y datos de ejemplo para lo que aún no tiene backend.
+     * (displayName) y estadísticas reales desde Realtime Database:
+     *   • statYear            → películas con status "watched" vistas este año.
+     *   • statCurrentStreak   → streak.current del usuario.
+     *   • statLongestStreak   → streak.longest del usuario.
+     *   • watchedCountLabel   → total de películas vistas.
+     * Los descubrimientos siguen usando datos de ejemplo (sin fuente aún).
      */
-    private fun buildProfileState(): ProfileUiState {
+    private suspend fun buildProfileState(): ProfileUiState {
         val name = authManager.currentDisplayName() ?: getString(R.string.profile_name_fallback)
         val initial = authManager.currentInitial()
+
+        // Estadísticas reales del usuario. Ante error de red se usan ceros por
+        // defecto (getWatched*/getStreak ya devuelven vacío sin sesión).
+        val currentYear = Calendar.getInstance().get(Calendar.YEAR)
+        val watchedThisYear = runCatching { userRepo.getWatchedCountForYear(currentYear) }.getOrDefault(0)
+        val totalWatched = runCatching { userRepo.getWatchedCount() }.getOrDefault(0)
+        val streak = runCatching { userRepo.getStreak() }.getOrNull()
+
         return ProfileUiState(
             name = name,
             avatarInitial = initial,
+            watchedCountLabel = getString(R.string.profile_watched_count_fmt, totalWatched),
+            statYear = watchedThisYear,
+            statCurrentStreak = streak?.current ?: 0,
+            statLongestStreak = streak?.longest ?: 0,
             discoveriesTitle = getString(R.string.profile_discoveries_title_fmt, name),
             discoveries = SampleData.discoveries
-            // role, watchedCountLabel y stats mantienen sus valores de ejemplo
-            // hasta que exista una fuente real (Firestore/Repository).
+            // role y discoveries mantienen sus valores de ejemplo hasta que exista
+            // una fuente real para ellos.
         )
     }
 
