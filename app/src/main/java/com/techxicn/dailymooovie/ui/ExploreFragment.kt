@@ -172,10 +172,13 @@ class ExploreFragment : Fragment() {
         binding.tvMonth.text = state.monthLabel
         // Mapa id (del item clicado) → fecha ISO del día que representa, para que
         // Film muestre la etiqueta de fecha del día correcto (no una fecha propia).
-        binding.rvCatalog.adapter = CatalogMovieAdapter(state.movies) { movie ->
-            val date = items.firstOrNull { it.ui.id == movie.id }?.date
-            navigateTo(FilmFragment.newInstance(movie.id, date))
-        }
+        binding.rvCatalog.adapter = CatalogMovieAdapter(
+            items = state.movies,
+            onItemClick = { movie ->
+                val date = items.firstOrNull { it.ui.id == movie.id }?.date
+                navigateTo(FilmFragment.newInstance(movie.id, date))
+            }
+        )
     }
 
     /** Cambio de mes: [delta] = -1 mes anterior, +1 siguiente. Recarga el estado. */

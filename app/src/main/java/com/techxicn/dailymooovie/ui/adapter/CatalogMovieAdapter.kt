@@ -17,7 +17,7 @@ import com.techxicn.dailymooovie.model.CatalogMovieUi
 class CatalogMovieAdapter(
     private val items: List<CatalogMovieUi>,
     private val onItemClick: (CatalogMovieUi) -> Unit = {},
-    private val onItemLongClick: (CatalogMovieUi) -> Unit = {}
+    private val onItemLongClick: ((CatalogMovieUi) -> Unit)? = null
 ) : RecyclerView.Adapter<CatalogMovieAdapter.VH>() {
 
     inner class VH(val binding: ItemCatalogMovieBinding) :
@@ -41,9 +41,14 @@ class CatalogMovieAdapter(
                 else R.string.catalog_status_not_watched
             )
             root.setOnClickListener { onItemClick(item) }
-            root.setOnLongClickListener {
-                onItemLongClick(item)
-                true
+            if (onItemLongClick != null) {
+                root.setOnLongClickListener {
+                    onItemLongClick.invoke(item)
+                    true
+                }
+            } else {
+                root.setOnLongClickListener(null)
+                root.isLongClickable = false
             }
             com.techxicn.dailymooovie.util.ImageLoader.loadPoster(ivItemPoster, item.posterUrl)
         }
