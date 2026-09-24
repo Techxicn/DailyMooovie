@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    poster_placeholder.xml — placeholder mientras Glide carga el poster.
+    Gris muy claro, plano, sin corners (coherente con shape_poster_flat).
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/colorSurfaceVariant" />
+</shape>

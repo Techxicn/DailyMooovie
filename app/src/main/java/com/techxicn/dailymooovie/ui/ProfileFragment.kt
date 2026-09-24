@@ -10,10 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.techxicn.dailymooovie.R
 import com.techxicn.dailymooovie.auth.AuthHost
 import com.techxicn.dailymooovie.auth.AuthManager
+import com.techxicn.dailymooovie.data.MovieRepository
 import com.techxicn.dailymooovie.data.UserMovieRepository
 import com.techxicn.dailymooovie.databinding.FragmentProfileBinding
+import com.techxicn.dailymooovie.model.MovieCardUi
 import com.techxicn.dailymooovie.model.ProfileUiState
-import com.techxicn.dailymooovie.model.SampleData
 import com.techxicn.dailymooovie.ui.adapter.FavoritesAdapter
 import kotlinx.coroutines.launch
 import java.util.Calendar
@@ -36,6 +37,7 @@ class ProfileFragment : Fragment() {
 
     private lateinit var authManager: AuthManager
     private val userRepo = UserMovieRepository()
+    private val movieRepo = MovieRepository()
     private val host get() = activity as? AuthHost
 
     override fun onCreateView(
@@ -56,9 +58,15 @@ class ProfileFragment : Fragment() {
 
         // Recarga el perfil desde Firebase y luego renderiza con el nombre real
         // y las estadísticas reales del usuario (watched del año + streak).
+        showLoading()
         viewLifecycleOwner.lifecycleScope.launch {
-            authManager.reloadUser()
-            render(buildProfileState())
+            try {
+                authManager.reloadUser()
+                render(buildProfileState())
+                showContent()
+            } catch (e: Exception) {
+                showError()
+            }
         }
 
         binding.btnSignOut.setOnClickListener { host?.onSignOut() }
@@ -87,6 +95,21 @@ class ProfileFragment : Fragment() {
         val totalWatched = runCatching { userRepo.getWatchedCount() }.getOrDefault(0)
         val streak = runCatching { userRepo.getStreak() }.getOrNull()
 
+        // Discoveries = últimas 3-5 películas marcadas como "watched" (más reciente
+        // primero por watchedAt). Se resuelven a Movie para obtener título + poster.
+        val discoveries = runCatching {
+            userRepo.getRecentWatchedMovieIds(limit = 5)
+                .mapNotNull { id -> movieRepo.getMovieById(id) }
+                .map { movie ->
+                    MovieCardUi(
+                        id = movie.id,
+                        title = movie.title,
+                        subtitle = movie.director,
+                        posterUrl = movie.posterUrl.ifBlank { null }
+                    )
+                }
+        }.getOrDefault(emptyList())
+
         return ProfileUiState(
             name = name,
             avatarInitial = initial,
@@ -95,9 +118,7 @@ class ProfileFragment : Fragment() {
             statCurrentStreak = streak?.current ?: 0,
             statLongestStreak = streak?.longest ?: 0,
             discoveriesTitle = getString(R.string.profile_discoveries_title_fmt, name),
-            discoveries = SampleData.discoveries
-            // role y discoveries mantienen sus valores de ejemplo hasta que exista
-            // una fuente real para ellos.
+            discoveries = discoveries
         )
     }
 
@@ -105,6 +126,24 @@ class ProfileFragment : Fragment() {
     fun render(state: ProfileUiState) {
         binding.bind(state)
         binding.rvDiscoveries.adapter = FavoritesAdapter(state.discoveries)
+    }
+
+    private fun showLoading() {
+        binding.progressLoading.visibility = View.VISIBLE
+        binding.contentScroll.visibility = View.GONE
+        binding.tvError.visibility = View.GONE
+    }
+
+    private fun showContent() {
+        binding.progressLoading.visibility = View.GONE
+        binding.tvError.visibility = View.GONE
+        binding.contentScroll.visibility = View.VISIBLE
+    }
+
+    private fun showError() {
+        binding.progressLoading.visibility = View.GONE
+        binding.contentScroll.visibility = View.GONE
+        binding.tvError.visibility = View.VISIBLE
     }
 
     override fun onDestroyView() {

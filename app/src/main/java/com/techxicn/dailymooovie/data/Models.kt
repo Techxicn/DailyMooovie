@@ -33,8 +33,16 @@ data class Movie(
     val posterUrl: String = "",
     val synopsis: String = "",
     val trailerUrl: String = "",
-    /** Fecha en la que esta película es "película del día". Formato "yyyy-MM-dd". */
-    val releaseDate: String = ""
+    /** Director de la película. */
+    val director: String = "",
+    /** Géneros; pueden venir varios separados por " / " (p. ej. "Drama / Fantasía"). */
+    val genre: String = "",
+    /** Duración en minutos. */
+    val durationMinutes: Int = 0,
+    /** Valoración (0.0..10.0 típicamente). */
+    val rating: Double = 0.0,
+    /** URL de Letterboxd (opcional, solo referencia). */
+    val letterboxdUrl: String = ""
 ) {
     /**
      * Id de la película = clave del nodo en RTDB. No se persiste como campo;

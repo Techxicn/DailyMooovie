@@ -13,10 +13,16 @@
     El grid se llena dinámicamente con las películas guardadas en la watchlist del
     usuario provistas por la lógica del proyecto.
 -->
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+<LinearLayout
+    android:id="@+id/contentRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -98,3 +104,26 @@
         tools:itemCount="9" />
 
 </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:contentDescription="@string/cd_loading" />
+
+    <TextView
+        android:id="@+id/tvError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:gravity="center"
+        android:text="@string/state_error_generic"
+        android:textColor="@color/colorOnSurfaceMuted"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+</FrameLayout>

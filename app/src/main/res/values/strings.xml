@@ -78,6 +78,14 @@
     <string name="watchlist_removed">Película quitada de tu watchlist</string>
     <string name="profile_watched_count_fmt">%1$d Moovies watched</string>
 
+    <!-- ── Trailer ────────────────────────────────────────────── -->
+    <string name="trailer_unavailable">No hay tráiler disponible para esta película.</string>
+    <string name="trailer_no_app">No se encontró una app para abrir el tráiler.</string>
+
+    <!-- ── Estados de carga / error ───────────────────────────── -->
+    <string name="state_error_generic">No se pudieron cargar los datos. Revisa tu conexión e inténtalo de nuevo.</string>
+    <string name="cd_loading">Cargando</string>
+
     <!-- ══════════════════════════════════════════════════════════
          AUTENTICACIÓN (Firebase Auth + Google Credential Manager)
     ══════════════════════════════════════════════════════════════ -->

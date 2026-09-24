@@ -17,10 +17,15 @@
 
     Los descubrimientos se llenan dinámicamente desde la lógica del proyecto.
 -->
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/contentScroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
@@ -336,3 +341,26 @@
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:contentDescription="@string/cd_loading" />
+
+    <TextView
+        android:id="@+id/tvError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:gravity="center"
+        android:text="@string/state_error_generic"
+        android:textColor="@color/colorOnSurfaceMuted"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+</FrameLayout>

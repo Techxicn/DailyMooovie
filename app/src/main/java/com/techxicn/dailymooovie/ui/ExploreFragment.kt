@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.techxicn.dailymooovie.R
+import com.techxicn.dailymooovie.data.DailyQueueRepository
+import com.techxicn.dailymooovie.data.DateUtils
 import com.techxicn.dailymooovie.data.MovieRepository
 import com.techxicn.dailymooovie.data.MovieStatus
 import com.techxicn.dailymooovie.data.MovieUiMapper
@@ -22,9 +24,11 @@ import java.util.Locale
 /**
  * Tab CATALOG (Film Catalog) — grid mensual de películas recomendadas.
  *
- * Carga el catálogo del mes seleccionado desde /movies (MovieRepository) y cruza
- * cada película con el estado del usuario (/users/{uid}/movies) para mostrar
- * "Watched" / "Not Watched" real. Las flechas cambian de mes y recargan.
+ * Para cada día del mes mostrado se resuelve QUÉ película corresponde usando la
+ * dailyQueue del usuario (única por usuario), no una query por releaseDate. Los
+ * días anteriores a queueStartDate (el usuario aún no tenía cuenta) se omiten.
+ * Cada película se cruza con el estado del usuario (/users/{uid}/movies) para
+ * mostrar "Watched" / "Not Watched" real. Las flechas cambian de mes y recargan.
  */
 class ExploreFragment : Fragment() {
 
@@ -33,6 +37,7 @@ class ExploreFragment : Fragment() {
 
     private val movieRepo = MovieRepository()
     private val userRepo = UserMovieRepository()
+    private val queueRepo = DailyQueueRepository()
 
     // Mes actualmente mostrado (se inicializa al mes en curso).
     private var year = 0
@@ -60,34 +65,88 @@ class ExploreFragment : Fragment() {
         loadCatalog()
     }
 
-    /** Carga el catálogo del mes actual y cruza con el estado del usuario. */
+    /**
+     * Carga el catálogo del mes: para cada día del mes resuelve el movieId vía la
+     * dailyQueue del usuario y lo cruza con su estado. Omite los días previos a
+     * queueStartDate (sin cuenta aún) y los que no resuelvan a una película.
+     */
     private fun loadCatalog() {
+        showLoading()
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                val movies = movieRepo.getCatalogForMonth(year, month)
+                // Se leen queue, startDate y estados UNA vez; el resto es en memoria.
+                val queue = queueRepo.getQueue()
+                val startDate = queueRepo.getQueueStartDate()
                 val statuses = userRepo.getAllStatuses()
-                val items = movies.map { movie ->
-                    val watched = statuses[movie.id]?.status == MovieStatus.WATCHED
-                    MovieUiMapper.toCatalogItem(movie, watched)
+
+                val items = mutableListOf<CatalogItem>()
+                if (queue.isNotEmpty() && startDate != null) {
+                    // Caché local de películas ya resueltas por id (evita relecturas).
+                    val movieCache = HashMap<String, com.techxicn.dailymooovie.data.Movie?>()
+                    for (isoDate in datesOfMonth(year, month)) {
+                        val movieId = queueRepo.resolveMovieIdForDate(isoDate, queue, startDate)
+                            ?: continue // día anterior a queueStartDate → sin película
+                        val movie = movieCache.getOrPut(movieId) { movieRepo.getMovieById(movieId) }
+                            ?: continue
+                        val watched = statuses[movie.id]?.status == MovieStatus.WATCHED
+                        items += CatalogItem(
+                            date = isoDate,
+                            ui = MovieUiMapper.toCatalogItem(movie, isoDate, watched)
+                        )
+                    }
                 }
+
                 render(
                     CatalogUiState(
                         monthLabel = monthLabel(),
                         positionCounter = "%02d/%02d".format(0, items.size),
-                        movies = items
-                    )
+                        movies = items.map { it.ui }
+                    ),
+                    items
                 )
+                showContent()
             } catch (e: Exception) {
-                if (isAdded) {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.data_error_generic),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+                showError()
             }
         }
     }
+
+    /** Muestra el loader y oculta contenido/error. */
+    private fun showLoading() {
+        binding.progressLoading.visibility = View.VISIBLE
+        binding.contentRoot.visibility = View.GONE
+        binding.tvError.visibility = View.GONE
+    }
+
+    private fun showContent() {
+        binding.progressLoading.visibility = View.GONE
+        binding.tvError.visibility = View.GONE
+        binding.contentRoot.visibility = View.VISIBLE
+    }
+
+    private fun showError() {
+        binding.progressLoading.visibility = View.GONE
+        binding.contentRoot.visibility = View.GONE
+        binding.tvError.visibility = View.VISIBLE
+    }
+
+    /** Lista de fechas ISO ("yyyy-MM-dd") de todos los días de [year]-[month] (1..12). */
+    private fun datesOfMonth(year: Int, month: Int): List<String> {
+        val cal = Calendar.getInstance().apply {
+            clear()
+            set(Calendar.YEAR, year)
+            set(Calendar.MONTH, month - 1)
+            set(Calendar.DAY_OF_MONTH, 1)
+        }
+        val daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
+        return (1..daysInMonth).map { day ->
+            cal.set(Calendar.DAY_OF_MONTH, day)
+            DateUtils.format(cal.time)
+        }
+    }
+
+    /** Item del catálogo con su fecha ISO (para navegar a Film con el día correcto). */
+    private data class CatalogItem(val date: String, val ui: com.techxicn.dailymooovie.model.CatalogMovieUi)
 
     /** Etiqueta "SEPTEMBER 2026" para el mes/año actuales. */
     private fun monthLabel(): String {
@@ -103,12 +162,15 @@ class ExploreFragment : Fragment() {
     }
 
     /** Punto único de entrada de datos a la pantalla. */
-    fun render(state: CatalogUiState) {
+    private fun render(state: CatalogUiState, items: List<CatalogItem>) {
         binding.tvSectionLabel.text = state.sectionLabel
         binding.tvPositionCounter.text = state.positionCounter
         binding.tvMonth.text = state.monthLabel
+        // Mapa id (del item clicado) → fecha ISO del día que representa, para que
+        // Film muestre la etiqueta de fecha del día correcto (no una fecha propia).
         binding.rvCatalog.adapter = CatalogMovieAdapter(state.movies) { movie ->
-            navigateTo(FilmFragment.newInstance(movie.id))
+            val date = items.firstOrNull { it.ui.id == movie.id }?.date
+            navigateTo(FilmFragment.newInstance(movie.id, date))
         }
     }
 

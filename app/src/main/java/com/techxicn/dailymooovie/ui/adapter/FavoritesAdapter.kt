@@ -27,7 +27,7 @@ class FavoritesAdapter(
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = items[position]
         holder.binding.tvFavTitle.text = item.title
-        // holder.binding.ivFavPoster → cargar item.posterUrl con Glide/Picasso.
+        com.techxicn.dailymooovie.util.ImageLoader.loadPoster(holder.binding.ivFavPoster, item.posterUrl)
     }
 
     override fun getItemCount(): Int = items.size

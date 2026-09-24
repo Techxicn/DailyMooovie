@@ -8,6 +8,7 @@ import com.techxicn.dailymooovie.model.MyMoviesUiState
 import com.techxicn.dailymooovie.model.ProfileUiState
 import com.techxicn.dailymooovie.model.TodayUiState
 import com.techxicn.dailymooovie.model.FilmUiState
+import com.techxicn.dailymooovie.util.ImageLoader
 
 /**
  * ScreenBinders.kt
@@ -33,8 +34,8 @@ fun FragmentTodayBinding.bind(state: TodayUiState) {
     movieContent.tvMovieTitle.text = state.movieTitle
     movieContent.tvMovieSubtitle.text = state.movieSubtitle
     movieContent.tvSynopsis.text = state.synopsis
-    // state.posterUrl / isWatched / isSaved → cargar imagen y reflejar estado en los
-    // botones de acción con la librería de imágenes del proyecto cuando esté integrada.
+    ImageLoader.loadPoster(movieContent.ivPoster, state.posterUrl)
+    // isWatched / isSaved → (estado de botones se gestiona en el fragment).
 }
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -48,7 +49,8 @@ fun FragmentFilmBinding.bind(state: FilmUiState) {
     movieContent.tvMovieTitle.text = state.movieTitle
     movieContent.tvMovieSubtitle.text = state.movieSubtitle
     movieContent.tvSynopsis.text = state.synopsis
-    // state.posterUrl / isWatched / isSaved → idéntico manejo que Today.
+    ImageLoader.loadPoster(movieContent.ivPoster, state.posterUrl)
+    // isWatched / isSaved → idéntico manejo que Today (botones en el fragment).
 }
 
 // ─────────────────────────────────────────────────────────────────────────

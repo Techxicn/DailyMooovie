@@ -25,46 +25,15 @@ class MovieRepository(
     private val moviesRef: DatabaseReference get() = db.getReference("movies")
 
     /**
-     * Película del día: la que tiene releaseDate == fecha actual ("yyyy-MM-dd").
-     * Devuelve null si no hay ninguna película programada para hoy.
-     */
-    suspend fun getMovieOfTheDay(): Movie? = getMovieForDate(DateUtils.today())
-
-    /**
-     * Película cuyo releaseDate coincide exactamente con [date] ("yyyy-MM-dd").
-     * Devuelve null si no existe.
-     */
-    suspend fun getMovieForDate(date: String): Movie? {
-        val snapshot = moviesRef
-            .orderByChild("releaseDate")
-            .equalTo(date)
-            .get()
-            .await()
-        // equalTo puede devolver varios hijos; tomamos el primero.
-        return snapshot.children.firstOrNull()?.toMovie()
-    }
-
-    /**
-     * Catálogo de un mes: todas las películas cuyo releaseDate cae en [year]-[month]
-     * (month es 1..12). Ordenadas por releaseDate ascendente.
+     * Todos los ids del catálogo (las CLAVES de los nodos bajo /movies).
      *
-     * Se filtra por rango [inicio, fin) usando el prefijo "yyyy-MM": desde
-     * "yyyy-MM-01" (startAt) hasta el primer día del mes siguiente (endBefore
-     * emulado con endAt del último instante del mes actual vía prefijo).
+     * Es la fuente para construir/sincronizar la dailyQueue de cada usuario: se
+     * lee la lista completa de ids y luego DailyQueueRepository la mezcla y guarda.
+     * No deserializa las películas completas (solo necesita las claves).
      */
-    suspend fun getCatalogForMonth(year: Int, month: Int): List<Movie> {
-        val prefix = DateUtils.monthPrefix(year, month) // "yyyy-MM"
-        // Rango lexicográfico: todo lo que empiece por "yyyy-MM-" queda entre
-        // "yyyy-MM-" y "yyyy-MM-\uf8ff" (carácter alto que cierra el prefijo).
-        val snapshot = moviesRef
-            .orderByChild("releaseDate")
-            .startAt("$prefix-")
-            .endAt("$prefix-\uf8ff")
-            .get()
-            .await()
-        return snapshot.children
-            .mapNotNull { it.toMovie() }
-            .sortedBy { it.releaseDate }
+    suspend fun getAllMovieIds(): List<String> {
+        val snapshot = moviesRef.get().await()
+        return snapshot.children.mapNotNull { it.key }
     }
 
     /** Película por id (clave del nodo). Devuelve null si no existe. */

@@ -109,53 +109,69 @@ class UserMovieRepository(
 
     /**
      * Ids de las películas con status "watchlist" (para la pantalla Watchlist).
-     * El repositorio de películas resuelve luego los datos completos por id.
+     *
+     * Se lee el nodo completo /users/{uid}/movies con get() y se filtra el status
+     * EN MEMORIA, en vez de usar orderByChild("status").equalTo(...). Esto evita
+     * depender de la regla ".indexOn": "status" (que si falta hace que RTDB
+     * rechace la query en runtime). El índice sigue recomendado (ver
+     * database.rules.json) por rendimiento, pero la app ya no falla sin él.
      */
     suspend fun getWatchlistMovieIds(): List<String> {
         if (uid == null) return emptyList()
-        val snapshot = userMoviesRef()
-            .orderByChild("status")
-            .equalTo(MovieStatus.WATCHLIST)
-            .get()
-            .await()
-        return snapshot.children.mapNotNull { it.key }
+        val snapshot = userMoviesRef().get().await()
+        return snapshot.children.mapNotNull { child ->
+            val status = child.getValue(UserMovieStatus::class.java)
+            if (status?.status == MovieStatus.WATCHLIST) child.key else null
+        }
     }
 
     /** Conteo total de películas con status "watched" (para stats de Profile). */
     suspend fun getWatchedCount(): Int {
         if (uid == null) return 0
-        val snapshot = userMoviesRef()
-            .orderByChild("status")
-            .equalTo(MovieStatus.WATCHED)
-            .get()
-            .await()
-        return snapshot.childrenCount.toInt()
+        val snapshot = userMoviesRef().get().await()
+        return snapshot.children.count { child ->
+            child.getValue(UserMovieStatus::class.java)?.status == MovieStatus.WATCHED
+        }
     }
 
     /**
      * Conteo de películas con status "watched" cuyo watchedAt cae en [year].
-     * Para "Mooovies watched this year". Se filtra en cliente porque el año se
-     * deriva del timestamp watchedAt.
+     * Para "Mooovies watched this year". Se lee el nodo completo y se filtra en
+     * memoria (status + año del watchedAt), sin depender del índice.
      */
     suspend fun getWatchedCountForYear(year: Int): Int {
         if (uid == null) return 0
-        val snapshot = userMoviesRef()
-            .orderByChild("status")
-            .equalTo(MovieStatus.WATCHED)
-            .get()
-            .await()
+        val snapshot = userMoviesRef().get().await()
         val cal = java.util.Calendar.getInstance()
         return snapshot.children.count { child ->
             val status = child.getValue(UserMovieStatus::class.java)
-            val watchedAt = status?.watchedAt ?: return@count false
+            if (status?.status != MovieStatus.WATCHED) return@count false
+            val watchedAt = status.watchedAt ?: return@count false
             cal.timeInMillis = watchedAt
             cal.get(java.util.Calendar.YEAR) == year
         }
     }
 
-    // ─────────────────────────────────────────────────────────────────────
-    //  STREAK
-    // ─────────────────────────────────────────────────────────────────────
+    /**
+     * Ids de las últimas [limit] películas marcadas como "watched", ordenadas por
+     * watchedAt DESCENDENTE (más reciente primero). Para "Mooovie Discoveries" de
+     * Profile. Se lee el nodo completo y se ordena/filtra en memoria (sin índice).
+     */
+    suspend fun getRecentWatchedMovieIds(limit: Int = 5): List<String> {
+        if (uid == null) return emptyList()
+        val snapshot = userMoviesRef().get().await()
+        return snapshot.children
+            .mapNotNull { child ->
+                val status = child.getValue(UserMovieStatus::class.java)
+                val key = child.key
+                if (status?.status == MovieStatus.WATCHED && status.watchedAt != null && key != null) {
+                    key to status.watchedAt
+                } else null
+            }
+            .sortedByDescending { it.second }
+            .take(limit)
+            .map { it.first }
+    }
 
     /** Lee el streak actual del usuario (por defecto 0/0/"" si no existe). */
     suspend fun getStreak(): UserStreak {

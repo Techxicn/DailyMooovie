@@ -63,4 +63,9 @@ dependencies {
     // Realtime Database (KTX). Versión gestionada por el BoM de arriba.
     implementation(libs.firebase.database)
 
+    // ── Imágenes ───────────────────────────────────────────────
+    // Glide para cargar posters remotos (con placeholder/error). El User-Agent
+    // de navegador para m.media-amazon.com se inyecta por-petición (ver ImageLoader).
+    implementation(libs.glide)
+
 }

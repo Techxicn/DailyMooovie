@@ -13,6 +13,7 @@ recyclerview = "1.3.2"
 credentials = "1.3.0"
 googleid = "1.1.1"
 coroutinesPlayServices = "1.7.3"
+glide = "4.16.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -41,6 +42,12 @@ googleid = { group = "com.google.android.libraries.identity.googleid", name = "g
 
 # Integración de corrutinas con Task de Play Services (Task.await()).
 kotlinx-coroutines-play-services = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-play-services", version.ref = "coroutinesPlayServices" }
+
+# Glide (carga de imágenes). Se usa el artefacto base; el User-Agent de navegador
+# (algunos hosts como m.media-amazon.com bloquean el UA por defecto) se inyecta
+# por-petición vía GlideUrl + LazyHeaders, así no hace falta AppGlideModule ni un
+# annotation processor (KSP/kapt) extra.
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

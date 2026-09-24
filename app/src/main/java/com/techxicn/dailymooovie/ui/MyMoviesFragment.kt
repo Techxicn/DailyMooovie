@@ -51,13 +51,15 @@ class MyMoviesFragment : Fragment() {
 
     /** Carga los ids en watchlist y resuelve sus películas para el grid. */
     private fun loadWatchlist() {
+        showLoading()
         viewLifecycleOwner.lifecycleScope.launch {
             try {
                 val ids = userRepo.getWatchlistMovieIds()
                 // Resuelve cada id a su Movie; ignora ids huérfanos (película borrada).
                 val movies = ids.mapNotNull { movieRepo.getMovieById(it) }
-                // En watchlist se muestran como no vistas (watched = false).
-                val items = movies.map { MovieUiMapper.toCatalogItem(it, watched = false) }
+                // En watchlist no hay un "día" intrínseco (la película se repite en
+                // la queue): se pasa fecha vacía → sin etiqueta de fecha en el item.
+                val items = movies.map { MovieUiMapper.toCatalogItem(it, date = "", watched = false) }
 
                 val count = items.size
                 render(
@@ -71,16 +73,29 @@ class MyMoviesFragment : Fragment() {
                         movies = items
                     )
                 )
+                showContent()
             } catch (e: Exception) {
-                if (isAdded) {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.data_error_generic),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+                showError()
             }
         }
+    }
+
+    private fun showLoading() {
+        binding.progressLoading.visibility = View.VISIBLE
+        binding.contentRoot.visibility = View.GONE
+        binding.tvError.visibility = View.GONE
+    }
+
+    private fun showContent() {
+        binding.progressLoading.visibility = View.GONE
+        binding.tvError.visibility = View.GONE
+        binding.contentRoot.visibility = View.VISIBLE
+    }
+
+    private fun showError() {
+        binding.progressLoading.visibility = View.GONE
+        binding.contentRoot.visibility = View.GONE
+        binding.tvError.visibility = View.VISIBLE
     }
 
     /** Punto único de entrada de datos a la pantalla. */

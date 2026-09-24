@@ -45,7 +45,7 @@ class CatalogMovieAdapter(
                 onItemLongClick(item)
                 true
             }
-            // ivItemPoster → cargar item.posterUrl con Glide/Picasso cuando exista.
+            com.techxicn.dailymooovie.util.ImageLoader.loadPoster(ivItemPoster, item.posterUrl)
         }
     }
 

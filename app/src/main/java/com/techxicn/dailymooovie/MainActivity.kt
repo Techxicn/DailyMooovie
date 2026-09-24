@@ -8,8 +8,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.techxicn.dailymooovie.auth.AuthHost
 import com.techxicn.dailymooovie.auth.AuthManager
+import com.techxicn.dailymooovie.data.DailyQueueRepository
 import com.techxicn.dailymooovie.databinding.ActivityMainBinding
 import com.techxicn.dailymooovie.ui.ExploreFragment
 import com.techxicn.dailymooovie.ui.LoginFragment
@@ -17,6 +19,7 @@ import com.techxicn.dailymooovie.ui.MyMoviesFragment
 import com.techxicn.dailymooovie.ui.ProfileFragment
 import com.techxicn.dailymooovie.ui.RegisterFragment
 import com.techxicn.dailymooovie.ui.TodayFragment
+import kotlinx.coroutines.launch
 
 /**
  * Shell principal de MOOOVIE.
@@ -31,6 +34,7 @@ class MainActivity : AppCompatActivity(), AuthHost {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var authManager: AuthManager
+    private val queueRepo = DailyQueueRepository()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,11 +94,27 @@ class MainActivity : AppCompatActivity(), AuthHost {
         showLogin()
     }
 
-    /** Entra a la app autenticada: muestra el bottom nav y el tab Today. */
+    /**
+     * Entra a la app autenticada: primero asegura la cola diaria del usuario
+     * (genera en el primer acceso + sincroniza ids nuevos del catálogo), luego
+     * muestra el bottom nav y el tab Today.
+     *
+     * El init de la cola se hace ANTES de mostrar Today para que la película del
+     * día ya se pueda resolver en el primer login. Ante fallo de red se muestra
+     * Today igualmente (mostrará su placeholder si aún no hay cola).
+     */
     private fun enterApp() {
         setAuthChromeVisible(true)
-        showFragment(TodayFragment())
         binding.bottomNav.selectedItemId = R.id.navToday
+        lifecycleScope.launch {
+            // Idempotente: genera la cola solo si no existía; syncCatalog agrega al
+            // final los ids nuevos de /movies sin tocar el orden previo.
+            runCatching {
+                queueRepo.ensureQueueGenerated()
+                queueRepo.syncCatalog()
+            }
+            showFragment(TodayFragment())
+        }
     }
 
     // ── Helpers ──────────────────────────────────────────────────────────────
