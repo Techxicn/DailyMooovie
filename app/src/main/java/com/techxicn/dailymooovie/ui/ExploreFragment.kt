@@ -96,10 +96,14 @@ class ExploreFragment : Fragment() {
                     }
                 }
 
+                // Contador tipo "vistas / total del mes" (mismo criterio dinámico que
+                // usa Watchlist para su contador, no un valor fijo). El numerador es
+                // el número de películas del mes ya marcadas como vistas.
+                val watchedCount = items.count { it.ui.watched }
                 render(
                     CatalogUiState(
                         monthLabel = monthLabel(),
-                        positionCounter = "%02d/%02d".format(0, items.size),
+                        positionCounter = "%02d/%02d".format(watchedCount, items.size),
                         movies = items.map { it.ui }
                     ),
                     items

@@ -71,8 +71,11 @@ class ProfileFragment : Fragment() {
 
         binding.btnSignOut.setOnClickListener { host?.onSignOut() }
 
-        // Nota (solo capa visual): btnAchievements / btnShare / btnSettings
-        // quedan sin lógica; se conectarán en una fase posterior.
+        // Ajustes → pantalla Settings (toggle del recordatorio diario, etc.).
+        binding.btnSettings.setOnClickListener { navigateTo(SettingsFragment()) }
+
+        // Nota (solo capa visual): btnAchievements / btnShare quedan sin lógica;
+        // se conectarán en una fase posterior.
     }
 
     /**

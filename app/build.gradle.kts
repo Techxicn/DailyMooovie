@@ -68,4 +68,9 @@ dependencies {
     // de navegador para m.media-amazon.com se inyecta por-petición (ver ImageLoader).
     implementation(libs.glide)
 
+    // ── Trabajo en segundo plano (recordatorio diario local) ───
+    // WorkManager para programar la notificación diaria (~8:00 AM) de la película
+    // del día. Es trabajo local: NO usa Firebase Cloud Messaging ni servidor.
+    implementation(libs.androidx.work.runtime.ktx)
+
 }

@@ -78,6 +78,26 @@
     <string name="watchlist_removed">Película quitada de tu watchlist</string>
     <string name="profile_watched_count_fmt">%1$d Moovies watched</string>
 
+    <!-- ── Recordatorio diario (notificación local) ───────────── -->
+    <!-- Nombre y descripción del canal visibles en Ajustes del sistema. -->
+    <string name="notif_channel_daily_name">Recomendación diaria</string>
+    <string name="notif_channel_daily_desc">Aviso diario con la película que te toca hoy.</string>
+    <!-- %1$s = título de la película del día. -->
+    <string name="notif_daily_title_fmt">🎬 Tu película de hoy: %1$s</string>
+    <string name="notif_daily_body">Toca para verla</string>
+
+    <!-- ── Ajustes (Settings) ─────────────────────────────────── -->
+    <string name="settings_title">Ajustes</string>
+    <string name="settings_notifications_section">Notificaciones</string>
+    <string name="settings_daily_reminder_title">Recordatorio diario</string>
+    <string name="settings_daily_reminder_desc">Recibe un aviso cada mañana con tu película del día.</string>
+    <string name="settings_permission_blocked">Las notificaciones están desactivadas en el sistema. Toca aquí para activarlas en los ajustes.</string>
+
+    <!-- Apariencia / modo oscuro -->
+    <string name="settings_appearance_section">Apariencia</string>
+    <string name="settings_dark_mode_title">Modo oscuro</string>
+    <string name="settings_dark_mode_desc">Usa un tema oscuro en toda la app.</string>
+
     <!-- ── Trailer ────────────────────────────────────────────── -->
     <string name="trailer_unavailable">No hay tráiler disponible para esta película.</string>
     <string name="trailer_no_app">No se encontró una app para abrir el tráiler.</string>

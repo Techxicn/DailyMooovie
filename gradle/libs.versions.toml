@@ -14,6 +14,7 @@ credentials = "1.3.0"
 googleid = "1.1.1"
 coroutinesPlayServices = "1.7.3"
 glide = "4.16.0"
+workRuntime = "2.9.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -48,6 +49,11 @@ kotlinx-coroutines-play-services = { group = "org.jetbrains.kotlinx", name = "ko
 # por-petición vía GlideUrl + LazyHeaders, así no hace falta AppGlideModule ni un
 # annotation processor (KSP/kapt) extra.
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+
+# WorkManager (KTX): trabajo diferido/recurrente en segundo plano. Se usa para el
+# recordatorio diario local (notificación de la película del día ~8:00 AM), sin
+# depender de Firebase Cloud Messaging (es trabajo 100% local del dispositivo).
+androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workRuntime" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

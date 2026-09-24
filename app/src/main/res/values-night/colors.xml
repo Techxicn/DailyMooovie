@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    colors.xml (values-night) — MOOOVIE · Paleta MODO OSCURO
+    ═════════════════════════════════════════════════════════
+    Overrides de los MISMOS nombres de color de values/colors.xml. Como toda la app
+    referencia estos nombres (colorBackground, colorOnBackground, colorDivider…),
+    activar el modo noche recolorea la UI sin tocar los layouts.
+
+    Criterio de diseño:
+      • Fondo oscuro (no negro puro) para reducir fatiga; superficies un tono arriba.
+      • Texto claro sobre fondo oscuro.
+      • Se conserva el amarillo de marca como acento (sobre amarillo el texto sigue negro).
+-->
+<resources>
+
+    <!-- ── Acento Amarillo (marca) — se mantiene ───────────────── -->
+    <color name="colorAccentYellow">#FFFFC700</color>       <!-- amarillo primario Mooovie -->
+    <color name="colorAccentYellowDim">#33FFC700</color>    <!-- amarillo translúcido (ripple) -->
+    <color name="colorAccentYellowDark">#FFE6B400</color>   <!-- amarillo hover / borde / indicador nav -->
+
+    <!-- ── Backgrounds / Surfaces (oscuros) ────────────────────── -->
+    <color name="colorBackground">#FF121212</color>         <!-- fondo global app: gris muy oscuro -->
+    <color name="colorSurface">#FF1E1E1E</color>            <!-- superficies un tono más claro -->
+    <color name="colorSurfaceVariant">#FF2A2A2A</color>     <!-- chips / placeholders -->
+
+    <!-- ── Texto (claro sobre oscuro) ──────────────────────────── -->
+    <color name="colorOnBackground">#FFF5F5F5</color>       <!-- texto primario: casi blanco -->
+    <color name="colorOnSurface">#FFF5F5F5</color>          <!-- texto sobre superficie -->
+    <color name="colorOnSurfaceMuted">#FFB0B0B0</color>     <!-- texto secundario / subtítulos -->
+    <color name="colorOnSurfaceFaint">#FF6B6B6B</color>     <!-- placeholders / deshabilitado -->
+    <color name="colorOnAccent">#FF000000</color>           <!-- texto/icono sobre amarillo: sigue negro -->
+
+    <!-- ── Separadores ─────────────────────────────────────────── -->
+    <color name="colorDivider">#FF333333</color>            <!-- líneas divisorias tenues -->
+    <color name="colorDividerYellow">#FFFFC700</color>      <!-- línea divisoria amarilla (labels sección) -->
+
+    <!-- ── Legacy (referenciados por launcher) ─────────────────── -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+</resources>

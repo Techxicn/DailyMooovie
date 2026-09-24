@@ -1,0 +1,19 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!--
+        Ícono de la notificación del recordatorio diario (claqueta de cine).
+        DEBE ser una silueta blanca sobre transparente: en la status bar Android
+        usa solo el canal alfa del ícono (lo pinta con el color del sistema), así
+        que un ícono a color se vería como un cuadrado blanco. Por eso fillColor
+        es #FFFFFFFF y el fondo es transparente.
+    -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M4,4h3l1.5,3H5.5L4,4zM8.5,4h3l1.5,3h-3L8.5,4zM13,4h3l1.5,3h-3L13,4zM17.5,4h2.5l-1.5,3h-2.5L17.5,4z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M3,8h18v11a1,1 0 0,1 -1,1H4a1,1 0 0,1 -1,-1V8zM10,11v6l5,-3L10,11z" />
+</vector>

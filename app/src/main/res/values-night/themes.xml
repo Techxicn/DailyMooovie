@@ -2,27 +2,51 @@
 <resources>
 
     <!--
-        Light mode FIJO: el variante night hereda exactamente el mismo tema claro.
-        No hay modo oscuro en MOOOVIE.
+        MODO OSCURO (values-night) — MOOOVIE
+        ════════════════════════════════════
+        Se aplica cuando el modo noche está activo (por el toggle de Settings vía
+        AppCompatDelegate, o por el sistema en modo "seguir sistema"). Usa un parent
+        Material3 Dark y los colores oscuros de values-night/colors.xml.
+
+        Las barras del sistema pasan a íconos claros (windowLight*Bar = false) porque
+        el fondo ahora es oscuro. El navigation bar se mantiene amarillo (bottom nav).
     -->
-    <style name="Base.Theme.DailyMooovie" parent="Theme.Material3.Light.NoActionBar">
+    <style name="Base.Theme.DailyMooovie" parent="Theme.Material3.Dark.NoActionBar">
+
+        <!-- Color primario → amarillo acento (se conserva la marca) -->
         <item name="colorPrimary">@color/colorAccentYellow</item>
         <item name="colorPrimaryVariant">@color/colorAccentYellowDark</item>
         <item name="colorOnPrimary">@color/colorOnAccent</item>
+
+        <!-- Superficies oscuras -->
         <item name="colorSurface">@color/colorSurface</item>
         <item name="colorSurfaceVariant">@color/colorSurfaceVariant</item>
         <item name="colorOnSurface">@color/colorOnSurface</item>
         <item name="colorOnSurfaceVariant">@color/colorOnSurfaceMuted</item>
+
+        <!-- Fondo de ventana -->
         <item name="android:colorBackground">@color/colorBackground</item>
         <item name="android:windowBackground">@color/colorBackground</item>
+
+        <!-- Status & navigation bar: fondo oscuro → íconos claros -->
         <item name="android:statusBarColor">@color/colorBackground</item>
         <item name="android:navigationBarColor">@color/colorAccentYellow</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar">true</item>
+
+        <!-- Texto -->
         <item name="android:textColorPrimary">@color/colorOnBackground</item>
         <item name="android:textColorSecondary">@color/colorOnSurfaceMuted</item>
         <item name="android:textColorHint">@color/colorOnSurfaceFaint</item>
+
+        <!-- Divider / separadores -->
+        <item name="dividerHorizontal">@color/colorDivider</item>
+
+        <!-- Ripple sobre superficies -->
         <item name="colorControlHighlight">@color/colorAccentYellowDim</item>
+
     </style>
+
+    <style name="Theme.DailyMooovie" parent="Base.Theme.DailyMooovie" />
 
 </resources>
